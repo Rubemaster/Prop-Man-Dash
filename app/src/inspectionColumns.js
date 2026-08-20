@@ -1,5 +1,5 @@
 export const INSPECTION_COLUMNS = [
-	{ key: "propertyAddress", label: "Address", autoWidth: true },
+	{ key: "propertyAddress", label: "Address", width: 250 },
 	{ key: "city", label: "Town", autoWidth: true },
 	{ key: "zip", label: "Zip", autoWidth: true },
 	{ key: "state", label: "State", autoWidth: true },

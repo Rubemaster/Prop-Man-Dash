@@ -73,4 +73,9 @@ export default defineConfig({
   resolve: {
     dedupe: ['react', 'react-dom'],
   },
+  server: {
+    // Requests arrive here via the dev.rooftraq.com Cloudflare Tunnel with that
+    // Host header; Vite blocks unrecognized hosts by default (DNS-rebinding guard).
+    allowedHosts: ['dev.rooftraq.com'],
+  },
 })

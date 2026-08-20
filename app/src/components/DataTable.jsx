@@ -2,6 +2,15 @@ import { HotTable } from "@handsontable/react-wrapper";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
 
+const BUTTON_PADDING_PX = 32; // left+right padding + border of a Bootstrap btn-sm
+
+function measureTextWidth(text) {
+	const canvas = measureTextWidth._canvas || (measureTextWidth._canvas = document.createElement("canvas"));
+	const ctx = canvas.getContext("2d");
+	ctx.font = "14px system-ui, -apple-system, sans-serif";
+	return ctx.measureText(text).width;
+}
+
 export default function DataTable({ columns, rows, actionLabel, actionDoneLabel, onAction }) {
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
@@ -25,7 +34,11 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 			},
 		});
 		colHeaders.push("Actions");
-		colWidths.push(undefined);
+		const widestLabel = Math.max(
+			measureTextWidth(actionLabel),
+			measureTextWidth(actionDoneLabel || "Requested")
+		);
+		colWidths.push(Math.ceil(widestLabel) + BUTTON_PADDING_PX);
 	}
 
 	return (
@@ -35,7 +48,6 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 				columns={dataColumns}
 				colHeaders={colHeaders}
 				colWidths={colWidths}
-				autoColumnSize={true}
 				rowHeaders={true}
 				width="100%"
 				stretchH="all"

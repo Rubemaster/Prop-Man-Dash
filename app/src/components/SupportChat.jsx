@@ -9,10 +9,13 @@ export default function SupportChat() {
 	const [open, setOpen] = useState(false);
 	const [client, setClient] = useState(null);
 	const [channel, setChannel] = useState(null);
+	const [unreadCount, setUnreadCount] = useState(0);
 	const clientRef = useRef(null);
 
+	// Connect as soon as the user is known (not just on open) so the unread
+	// badge is live even while the panel is collapsed.
 	useEffect(() => {
-		if (!open || !user?.id || clientRef.current) return;
+		if (!user?.id || clientRef.current) return;
 		let cancelled = false;
 
 		(async () => {
@@ -39,6 +42,15 @@ export default function SupportChat() {
 			await supportChannel.watch();
 			if (cancelled) return;
 
+			// total_unread_count is Stream's own tracked value on the connected
+			// user, kept live via events -- no need to compute it ourselves.
+			setUnreadCount(chatClient.user?.total_unread_count || 0);
+			chatClient.on((event) => {
+				if (typeof event.total_unread_count === "number") {
+					setUnreadCount(event.total_unread_count);
+				}
+			});
+
 			clientRef.current = chatClient;
 			setClient(chatClient);
 			setChannel(supportChannel);
@@ -47,7 +59,7 @@ export default function SupportChat() {
 		return () => {
 			cancelled = true;
 		};
-	}, [open, user?.id]);
+	}, [user?.id]);
 
 	useEffect(() => {
 		return () => {
@@ -65,15 +77,31 @@ export default function SupportChat() {
 					bottom: "20px",
 					right: "20px",
 					zIndex: 1000,
-					backgroundColor: "#6c47ff",
+					backgroundColor: "#000000",
 					color: "#fff",
 					border: "none",
+					borderRadius: "999px",
 					padding: "12px 20px",
 					fontWeight: "bold",
 					cursor: "pointer",
+					boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
 				}}
 			>
 				{open ? "Close Support" : "Support Chat"}
+				{unreadCount > 0 && (
+					<span
+						style={{
+							marginLeft: "8px",
+							backgroundColor: "#e5484d",
+							color: "#fff",
+							borderRadius: "999px",
+							padding: "1px 7px",
+							fontSize: "12px",
+						}}
+					>
+						{unreadCount}
+					</span>
+				)}
 			</button>
 			{open && (
 				<div

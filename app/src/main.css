@@ -95,8 +95,8 @@ body {
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	margin: 1.25rem -1.25rem -1.25rem;
-	padding: 12px 1.25rem;
+	margin: 0 -1.25rem -1.25rem;
+	padding: 0 1.25rem;
 	background-color: #a6cbe8;
 }
 

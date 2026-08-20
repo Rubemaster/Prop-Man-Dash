@@ -11,7 +11,7 @@ export default function Results() {
 						<iframe
 							src="/extplorer/index.html"
 							title="Results file explorer"
-							style={{ width: "100%", height: "600px", border: "1px solid #000" }}
+							style={{ width: "100%", height: "600px", border: "none" }}
 						/>
 					</div>
 				</div>

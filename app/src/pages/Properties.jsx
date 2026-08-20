@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import DataTable from "../components/DataTable";
-import { PROPERTY_COLUMNS, PROPERTY_SAMPLE_ROW } from "../propertyColumns";
+import { PROPERTY_COLUMNS } from "../propertyColumns";
 
 const FILLOUT_SCRIPT_SRC = "https://server.fillout.com/embed/v1/";
 const INSPECTION_FORM_ID = "tSESngGoRKus";
@@ -57,7 +57,7 @@ function openInspectionPopup(propertyId, clerkUserId) {
 
 export default function Properties() {
 	const { user } = useUser();
-	const [rows, setRows] = useState([PROPERTY_SAMPLE_ROW]);
+	const [rows, setRows] = useState([]);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -74,8 +74,7 @@ export default function Properties() {
 		try {
 			const res = await fetch("/api/property-entries");
 			const data = await res.json();
-			const mapped = (data.responses || []).map(mapSubmission);
-			setRows(mapped.length ? mapped : [PROPERTY_SAMPLE_ROW]);
+			setRows((data.responses || []).map(mapSubmission));
 		} finally {
 			setLoading(false);
 		}

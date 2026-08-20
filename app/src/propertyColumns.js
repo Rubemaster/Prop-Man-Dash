@@ -26,15 +26,3 @@ export const PROPERTY_COLUMNS = [
 	},
 	{ key: "notes", label: "Notes" },
 ];
-
-export const PROPERTY_SAMPLE_ROW = {
-	submissionId: "sample",
-	address: "123 Main St",
-	city: "Springfield",
-	zip: "62704",
-	state: "IL",
-	roofCondition: "Good in need of check up",
-	roofType: "Saddle",
-	houseAge: "Built after 2010",
-	notes: "Example note",
-};

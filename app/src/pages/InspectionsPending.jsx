@@ -4,22 +4,22 @@ import Navbar from "../components/Navbar";
 import DataTable from "../components/DataTable";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
 
-const TIME_QUESTION_IDS = ["8wjq", "5pCM", "gujV", "aS23", "dWvi"];
+function extractAddress(sub) {
+	const addr = (sub.questions || []).find((q) => q.id === "x8sa")?.value;
+	if (!addr) return "";
+	return typeof addr === "object" ? addr.address1 || addr.address || "" : addr;
+}
 
-function mapSubmission(sub) {
-	const byId = Object.fromEntries((sub.questions || []).map((q) => [q.id, q.value]));
+function mapSubmission(sub, addressByPropertyId) {
 	const propertyId =
 		(sub.urlParameters || []).find((p) => p.name === "propertyid" || p.id === "propertyid")
-			?.value || "";
-	const preferredTime = TIME_QUESTION_IDS.map((id) => byId[id]).find(Boolean) || "";
+			?.value?.trim() || "";
 
 	return {
 		submissionId: sub.submissionId,
-		propertyId,
-		preferredTime,
-		deliverables: byId["gXsW"] || "",
-		accessNotes: byId["titU"] || "",
-		otherNotes: byId["utd8"] || "",
+		propertyAddress: addressByPropertyId[propertyId] || propertyId,
+		status: "Pending",
+		notes: "",
 	};
 }
 
@@ -31,9 +31,18 @@ export default function InspectionsPending() {
 	const refresh = async () => {
 		setLoading(true);
 		try {
-			const res = await fetch("/api/inspection-entries");
-			const data = await res.json();
-			setRows((data.responses || []).map(mapSubmission));
+			const [inspectionsRes, propertiesRes] = await Promise.all([
+				fetch("/api/inspection-entries"),
+				fetch("/api/property-entries"),
+			]);
+			const inspections = await inspectionsRes.json();
+			const properties = await propertiesRes.json();
+
+			const addressByPropertyId = Object.fromEntries(
+				(properties.responses || []).map((p) => [p.submissionId, extractAddress(p)])
+			);
+
+			setRows((inspections.responses || []).map((sub) => mapSubmission(sub, addressByPropertyId)));
 		} finally {
 			setLoading(false);
 		}

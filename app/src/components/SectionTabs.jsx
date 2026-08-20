@@ -12,7 +12,7 @@ export default function SectionTabs() {
 	return (
 		<div>
 			{TABS.map((tab) => (
-				<button key={tab.path} type="button" onClick={() => navigate(tab.path)}>
+				<button key={tab.path} type="button" style={{ all: "revert" }} onClick={() => navigate(tab.path)}>
 					{tab.label}
 				</button>
 			))}

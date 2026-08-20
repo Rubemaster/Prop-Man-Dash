@@ -21,7 +21,7 @@ export default function SectionTabs() {
 							padding: "8px 16px",
 							textDecoration: "none",
 							color: active ? "#ffffff" : "#000000",
-							backgroundColor: active ? "#6c47ff" : "#ffffff",
+							backgroundColor: active ? "#6b7280" : "#ffffff",
 							border: "1px solid #000000",
 							fontWeight: active ? "bold" : "normal",
 						}}

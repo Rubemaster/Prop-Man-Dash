@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import StatusCards from "../components/StatusCards";
-import BlankCards from "../components/BlankCards";
 import Footer from "../components/Footer";
 
 export default function UserDashboard() {
@@ -25,8 +24,6 @@ export default function UserDashboard() {
 		<>
 			<div style={{ minHeight: "100vh" }}>
 				<Navbar variant="customer" />
-				<br />
-				<BlankCards />
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} trailingCards={1} propertiesHeadingBlack={false} />
 				<br />

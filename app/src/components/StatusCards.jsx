@@ -19,7 +19,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 										: {}),
 								}}
 							>
-								<div className="card-header">
+								<div className={i === 0 && firstPlaceholderImage ? "card-header transparent-card-header" : "card-header"}>
 									<h5 className={propertiesHeadingBlack && !propertiesAsPlaceholder ? "card-title properties-heading-black" : "card-title"}>
 										{propertiesAsPlaceholder ? "Placeholder" : "Properties"}
 									</h5>

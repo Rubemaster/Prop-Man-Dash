@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 
-export default function StatusCards({ total = 0, delivered = 0, pending = 0 }) {
+export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false }) {
 	return (
 		<div className="row">
 			<div className="col">
 				<div className="col-md">
 					<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>
 						<div className="card text-center text-white mb-3" id="total-orders" style={{ height: "180px" }}>
-							<div className="card-header"><h5 className="card-title">Properties</h5></div>
-							<div className="card-body"><h3 className="card-title">{total}</h3></div>
+							{!hidePropertiesContent && (
+								<>
+									<div className="card-header"><h5 className="card-title">Properties</h5></div>
+									<div className="card-body"><h3 className="card-title">{total}</h3></div>
+								</>
+							)}
 						</div>
 					</Link>
 				</div>

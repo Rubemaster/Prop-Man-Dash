@@ -1,7 +1,7 @@
 export const PROPERTY_COLUMNS = [
 	{ key: "address", label: "Address", width: 200 },
 	{ key: "city", label: "City" },
-	{ key: "zip", label: "Zip", width: 50 },
+	{ key: "zip", label: "Zip", autoWidth: true },
 	{ key: "state", label: "State", autoWidth: true },
 	{
 		key: "roofCondition",

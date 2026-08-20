@@ -53,6 +53,12 @@ export default function Properties() {
 		}
 	};
 
+	useEffect(() => {
+		if (!user?.id) return;
+		refresh();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user?.id]);
+
 	const requestInspection = (rowIndex, rowData) => {
 		console.log("Requesting new inspection for", rowData);
 	};

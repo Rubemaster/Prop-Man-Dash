@@ -2,7 +2,7 @@ import { HotTable } from "@handsontable/react-wrapper";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
 
-const CELL_PADDING_PX = 16; // Handsontable's own <td> padding, not part of the button itself
+const CELL_PADDING_PX = 24; // Handsontable's own <td> padding + safety margin
 
 function makeActionButton(label) {
 	const btn = document.createElement("button");
@@ -17,23 +17,29 @@ function makeActionButton(label) {
 	return btn;
 }
 
-// Renders the real button off-screen and reads its actual width, rather than
-// estimating from font metrics -- guarantees the column matches the button.
-function measureButtonWidth(label) {
-	const btn = makeActionButton(label);
-	btn.style.position = "absolute";
-	btn.style.visibility = "hidden";
-	document.body.appendChild(btn);
-	const width = btn.getBoundingClientRect().width;
-	document.body.removeChild(btn);
+// Renders real DOM elements off-screen and reads their actual width, rather
+// than guessing at font metrics -- this is what actually stayed accurate for
+// the action button, so text columns use the same technique now.
+function measureRenderedWidth(el) {
+	el.style.position = "absolute";
+	el.style.visibility = "hidden";
+	el.style.whiteSpace = "nowrap";
+	document.body.appendChild(el);
+	const width = el.getBoundingClientRect().width;
+	document.body.removeChild(el);
 	return width;
 }
 
+function measureButtonWidth(label) {
+	return measureRenderedWidth(makeActionButton(label));
+}
+
 function measureTextWidth(text) {
-	const canvas = measureTextWidth._canvas || (measureTextWidth._canvas = document.createElement("canvas"));
-	const ctx = canvas.getContext("2d");
-	ctx.font = "13px system-ui, -apple-system, sans-serif";
-	return ctx.measureText(text).width;
+	const span = document.createElement("span");
+	span.className = "handsontable";
+	span.style.fontSize = "13px";
+	span.textContent = text;
+	return measureRenderedWidth(span);
 }
 
 // For columns marked autoWidth, size to the widest value actually present
@@ -76,6 +82,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				colWidths={colWidths}
 				rowHeaders={true}
 				rowHeaderWidth={25}
+				manualColumnResize={true}
 				width="100%"
 				stretchH="all"
 				height="auto"

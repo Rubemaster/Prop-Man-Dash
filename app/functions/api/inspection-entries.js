@@ -2,6 +2,7 @@ import { createClerkClient } from "@clerk/backend";
 import { getInspectionSubmissionIds } from "../_shared/clerk.js";
 
 const FILLOUT_FORM_ID = "tSESngGoRKus";
+const NO_STORE_HEADERS = { "Content-Type": "application/json", "Cache-Control": "no-store" };
 
 // Mirrors functions/api/property-entries.js but for inspection requests.
 export async function onRequestGet({ request, env }) {
@@ -16,7 +17,7 @@ export async function onRequestGet({ request, env }) {
 	if (!isAuthenticated) {
 		return new Response(JSON.stringify({ error: "unauthenticated" }), {
 			status: 401,
-			headers: { "Content-Type": "application/json" },
+			headers: NO_STORE_HEADERS,
 		});
 	}
 
@@ -24,19 +25,15 @@ export async function onRequestGet({ request, env }) {
 	const ownedIds = await getInspectionSubmissionIds(userId, env.CLERK_SECRET_KEY);
 
 	if (ownedIds.length === 0) {
-		return new Response(JSON.stringify({ responses: [] }), {
-			headers: { "Content-Type": "application/json" },
-		});
+		return new Response(JSON.stringify({ responses: [] }), { headers: NO_STORE_HEADERS });
 	}
 
 	const upstream = await fetch(
 		`https://api.fillout.com/v1/api/forms/${FILLOUT_FORM_ID}/submissions`,
-		{ headers: { Authorization: `Bearer ${env.FILLOUT_API}` } }
+		{ headers: { Authorization: `Bearer ${env.FILLOUT_API}` }, cache: "no-store" }
 	);
 	const data = await upstream.json();
 	const responses = (data.responses || []).filter((sub) => ownedIds.includes(sub.submissionId));
 
-	return new Response(JSON.stringify({ responses }), {
-		headers: { "Content-Type": "application/json" },
-	});
+	return new Response(JSON.stringify({ responses }), { headers: NO_STORE_HEADERS });
 }

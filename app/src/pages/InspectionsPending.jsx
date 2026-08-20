@@ -44,8 +44,8 @@ export default function InspectionsPending() {
 		setLoading(true);
 		try {
 			const [inspectionsRes, propertiesRes] = await Promise.all([
-				fetch("/api/inspection-entries"),
-				fetch("/api/property-entries"),
+				fetch("/api/inspection-entries", { cache: "no-store" }),
+				fetch("/api/property-entries", { cache: "no-store" }),
 			]);
 			const inspections = await inspectionsRes.json();
 			const properties = await propertiesRes.json();

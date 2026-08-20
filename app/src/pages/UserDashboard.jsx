@@ -12,10 +12,10 @@ export default function UserDashboard() {
 
 	useEffect(() => {
 		if (!user?.id) return;
-		fetch("/api/property-entries")
+		fetch("/api/property-entries", { cache: "no-store" })
 			.then((res) => res.json())
 			.then((data) => setPropertyCount((data.responses || []).length));
-		fetch("/api/inspection-entries")
+		fetch("/api/inspection-entries", { cache: "no-store" })
 			.then((res) => res.json())
 			.then((data) => setInspectionCount((data.responses || []).length));
 	}, [user?.id]);

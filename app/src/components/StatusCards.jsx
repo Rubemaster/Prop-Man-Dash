@@ -1,8 +1,22 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 export default function StatusCards({ total = 0, delivered = 0, pending = 0 }) {
+	const rowRef = useRef(null);
+
+	useEffect(() => {
+		const row = rowRef.current;
+		if (!row) return;
+		console.warn("[statuscards-debug] row width", row.getBoundingClientRect().width);
+		row.querySelectorAll(":scope > .col").forEach((col, i) => {
+			console.warn(`[statuscards-debug] col[${i}] width`, col.getBoundingClientRect().width, "computed min-width", getComputedStyle(col).minWidth);
+			const card = col.querySelector(".card");
+			console.warn(`[statuscards-debug] card[${i}] width`, card.getBoundingClientRect().width, "computed min-width", getComputedStyle(card).minWidth, "computed width", getComputedStyle(card).width);
+		});
+	});
+
 	return (
-		<div className="row" style={{ flexWrap: "wrap" }}>
+		<div className="row" style={{ flexWrap: "wrap" }} ref={rowRef}>
 			<div className="col" style={{ minWidth: "200px" }}>
 				<div className="col-md">
 					<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>

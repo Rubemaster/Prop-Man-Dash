@@ -29,10 +29,26 @@ function measureButtonWidth(label) {
 	return width;
 }
 
+function measureTextWidth(text) {
+	const canvas = measureTextWidth._canvas || (measureTextWidth._canvas = document.createElement("canvas"));
+	const ctx = canvas.getContext("2d");
+	ctx.font = "13px system-ui, -apple-system, sans-serif";
+	return ctx.measureText(text).width;
+}
+
+// For columns marked autoWidth, size to the widest value actually present
+// (header or data) instead of a fixed guess -- real data can vary a lot
+// (e.g. a "state" field returning "Illinois" instead of "IL").
+function autoFitWidth(column, rows) {
+	const values = [column.label, ...rows.map((r) => String(r[column.key] ?? ""))];
+	const widest = Math.max(...values.map(measureTextWidth));
+	return Math.ceil(widest) + CELL_PADDING_PX;
+}
+
 export default function DataTable({ columns, rows, actionLabel, onAction }) {
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
-	const colWidths = columns.map((c) => c.width || 100);
+	const colWidths = columns.map((c) => c.width || (c.autoWidth ? autoFitWidth(c, rows) : 100));
 
 	if (actionLabel && onAction) {
 		dataColumns.unshift({

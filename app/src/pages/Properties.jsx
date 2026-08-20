@@ -34,11 +34,35 @@ export default function Properties() {
 		// must re-inject a fresh <script> (not skip if one exists) on every
 		// mount so revisits to this page get scanned again too.
 		if (!user?.id) return;
+		console.log("[fillout-debug] injecting embed script for user.id =", user.id);
 		document.querySelectorAll(`script[src="${FILLOUT_SCRIPT_SRC}"]`).forEach((s) => s.remove());
 		const script = document.createElement("script");
 		script.src = FILLOUT_SCRIPT_SRC;
+		script.onload = () => {
+			const btn = document.querySelector("[data-fillout-embed-type='popup']");
+			console.log(
+				"[fillout-debug] script loaded. button data-clerkuserid =",
+				btn?.getAttribute("data-clerkuserid"),
+				"data-fillout-initialized =",
+				btn?.getAttribute("data-fillout-initialized")
+			);
+		};
 		document.body.appendChild(script);
-		return () => script.remove();
+
+		const onClickCapture = () => {
+			setTimeout(() => {
+				const iframe = document.querySelector(
+					".fillout-embed-popup iframe, .fillout-embed-dynamic-popup iframe"
+				);
+				console.log("[fillout-debug] popup iframe src after click =", iframe?.src);
+			}, 300);
+		};
+		document.addEventListener("click", onClickCapture, true);
+
+		return () => {
+			script.remove();
+			document.removeEventListener("click", onClickCapture, true);
+		};
 	}, [user?.id]);
 
 	const refresh = async () => {

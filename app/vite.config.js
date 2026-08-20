@@ -62,9 +62,13 @@ function pagesFunctionsDevPlugin() {
     async configureServer(server) {
       const { onRequestGet } = await server.ssrLoadModule('/functions/api/property-entries.js')
       const { onRequestPost } = await server.ssrLoadModule('/functions/api/fillout.js')
+      const { onRequestGet: onRequestGetInspections } = await server.ssrLoadModule('/functions/api/inspection-entries.js')
+      const { onRequestPost: onRequestPostInspection } = await server.ssrLoadModule('/functions/api/inspection.js')
 
       server.middlewares.use('/api/property-entries', toNodeMiddleware(onRequestGet, env))
       server.middlewares.use('/api/fillout', toNodeMiddleware(onRequestPost, env))
+      server.middlewares.use('/api/inspection-entries', toNodeMiddleware(onRequestGetInspections, env))
+      server.middlewares.use('/api/inspection', toNodeMiddleware(onRequestPostInspection, env))
     },
   }
 }

@@ -8,9 +8,9 @@ export async function getClerkUser(userId, secretKey) {
 	return res.json();
 }
 
-export async function addPropertySubmissionId(userId, submissionId, secretKey) {
+async function addSubmissionId(userId, submissionId, secretKey, metadataKey) {
 	const user = await getClerkUser(userId, secretKey);
-	const existing = user.private_metadata?.propertySubmissionIds || [];
+	const existing = user.private_metadata?.[metadataKey] || [];
 	if (existing.includes(submissionId)) return existing;
 
 	const updated = [...existing, submissionId];
@@ -21,14 +21,30 @@ export async function addPropertySubmissionId(userId, submissionId, secretKey) {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify({
-			private_metadata: { ...user.private_metadata, propertySubmissionIds: updated },
+			private_metadata: { ...user.private_metadata, [metadataKey]: updated },
 		}),
 	});
 	if (!res.ok) throw new Error(`Clerk updateMetadata failed (${res.status}): ${await res.text()}`);
 	return updated;
 }
 
-export async function getPropertySubmissionIds(userId, secretKey) {
+async function getSubmissionIds(userId, secretKey, metadataKey) {
 	const user = await getClerkUser(userId, secretKey);
-	return user.private_metadata?.propertySubmissionIds || [];
+	return user.private_metadata?.[metadataKey] || [];
+}
+
+export function addPropertySubmissionId(userId, submissionId, secretKey) {
+	return addSubmissionId(userId, submissionId, secretKey, "propertySubmissionIds");
+}
+
+export function getPropertySubmissionIds(userId, secretKey) {
+	return getSubmissionIds(userId, secretKey, "propertySubmissionIds");
+}
+
+export function addInspectionSubmissionId(userId, submissionId, secretKey) {
+	return addSubmissionId(userId, submissionId, secretKey, "inspectionSubmissionIds");
+}
+
+export function getInspectionSubmissionIds(userId, secretKey) {
+	return getSubmissionIds(userId, secretKey, "inspectionSubmissionIds");
 }

@@ -16,6 +16,13 @@ export default function Navbar({ variant }) {
 			>
 				<span className="navbar-toggler-icon"></span>
 			</button>
+			<div className="collapse navbar-collapse" id="navbarNav">
+				<ul className="navbar-nav">
+					<li className="nav-item">
+						<Link className="nav-link" to="/user">Home</Link>
+					</li>
+				</ul>
+			</div>
 			<div className="ml-auto">
 				<UserButton afterSignOutUrl="/" />
 			</div>

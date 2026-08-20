@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { HotTable } from "@handsontable/react-wrapper";
 import { registerPlugin } from "handsontable/plugins/registry";
 import { ManualColumnResize } from "handsontable/plugins/manualColumnResize";
@@ -58,6 +59,19 @@ function autoFitWidth(column, rows) {
 }
 
 export default function DataTable({ columns, rows, actionLabel, onAction }) {
+	const hotRef = useRef(null);
+
+	// Handsontable's own updateSettings() calls updateData() (not loadData())
+	// for every update after the first mount -- updateData is documented to
+	// deliberately *preserve* row/column state across updates, unlike
+	// loadData's full reset. Calling loadData() explicitly here guarantees a
+	// clean replace whenever the actual row set changes (e.g. a record no
+	// longer comes back from the API), instead of relying on the prop-driven
+	// path that's designed to hang on to prior state.
+	useEffect(() => {
+		hotRef.current?.hotInstance?.loadData(rows);
+	}, [rows]);
+
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
 	const colWidths = columns.map((c) => c.width || (c.autoWidth ? autoFitWidth(c, rows) : 100));
@@ -82,6 +96,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 	return (
 		<div style={{ width: "100%" }}>
 			<HotTable
+				ref={hotRef}
 				data={rows}
 				columns={dataColumns}
 				colHeaders={colHeaders}

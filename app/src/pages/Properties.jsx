@@ -98,7 +98,13 @@ export default function Properties() {
 			<div className="row">
 				<div className="col-md">
 					<div className="card card-body">
-						<div className="mb-3" style={{ display: "flex", gap: "8px" }}>
+						<DataTable
+							columns={PROPERTY_COLUMNS}
+							rows={rows}
+							actionLabel="New Inspection"
+							onAction={requestInspection}
+						/>
+						<div className="mb-3" style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
 							<button
 								type="button"
 								className="btn btn-secondary"
@@ -122,12 +128,6 @@ export default function Properties() {
 								</button>
 							)}
 						</div>
-						<DataTable
-							columns={PROPERTY_COLUMNS}
-							rows={rows}
-							actionLabel="New Inspection"
-							onAction={requestInspection}
-						/>
 					</div>
 				</div>
 			</div>

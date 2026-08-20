@@ -158,8 +158,13 @@ body {
 	color: #000000 !important;
 }
 
-.card.trailing-card-white {
+.card.trailing-card-white,
+.card.trailing-card-white .card-header,
+.card.trailing-card-white .card-body {
 	background-color: #ffffff !important;
+}
+
+.card.trailing-card-white {
 	border: 1px solid #000000 !important;
 }
 

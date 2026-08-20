@@ -30,7 +30,7 @@ export default function UserDashboard() {
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} trailingCards={1} propertiesHeadingBlack={false} />
 				<br />
-				<StatusCards total={propertyCount} delivered={inspectionCount} hidePropertiesContent propertiesRepeat={4} showOtherCards={false} cardHeight={30} />
+				<StatusCards total={propertyCount} delivered={inspectionCount} hidePropertiesContent propertiesRepeat={4} showOtherCards={false} cardHeight={30} propertiesAsPlaceholder />
 				<br />
 				<div className="row">
 					<div className="col">

@@ -27,11 +27,19 @@ export default function Properties() {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		if (document.querySelector(`script[src="${FILLOUT_SCRIPT_SRC}"]`)) return;
+		// Fillout's embed script bakes the popup iframe's src (including all
+		// data-* params) once, synchronously, the moment it loads -- there's no
+		// re-scan and no MutationObserver. So we can't load it until the button
+		// below actually has the real data-clerkuserid value in the DOM, and we
+		// must re-inject a fresh <script> (not skip if one exists) on every
+		// mount so revisits to this page get scanned again too.
+		if (!user?.id) return;
+		document.querySelectorAll(`script[src="${FILLOUT_SCRIPT_SRC}"]`).forEach((s) => s.remove());
 		const script = document.createElement("script");
 		script.src = FILLOUT_SCRIPT_SRC;
 		document.body.appendChild(script);
-	}, []);
+		return () => script.remove();
+	}, [user?.id]);
 
 	const refresh = async () => {
 		setLoading(true);
@@ -61,18 +69,20 @@ export default function Properties() {
 							>
 								{loading ? "Refreshing..." : "Refresh"}
 							</button>
-							<button
-								type="button"
-								data-fillout-id="3PFLPZSWoFus"
-								data-fillout-embed-type="popup"
-								data-fillout-dynamic-resize
-								data-fillout-inherit-parameters
-								data-fillout-popup-size="medium"
-								data-clerkuserid={user?.id}
-								className="btn btn-primary"
-							>
-								Add Property
-							</button>
+							{user?.id && (
+								<button
+									type="button"
+									data-fillout-id="3PFLPZSWoFus"
+									data-fillout-embed-type="popup"
+									data-fillout-dynamic-resize
+									data-fillout-inherit-parameters
+									data-fillout-popup-size="medium"
+									data-clerkuserid={user.id}
+									className="btn btn-primary"
+								>
+									Add Property
+								</button>
+							)}
 						</div>
 						<DataTable columns={PROPERTY_COLUMNS} rows={rows} />
 					</div>

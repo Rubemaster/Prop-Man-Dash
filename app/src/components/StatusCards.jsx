@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false }) {
+export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false, firstPlaceholderHeight = null, firstPlaceholderImage = null }) {
 	return (
 		<div className="row">
 			{Array.from({ length: propertiesRepeat }).map((_, i) => (
@@ -10,7 +10,14 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 							<div
 								className={propertiesAsPlaceholder ? "card text-center text-white mb-3 trailing-card-white" : "card text-center text-white mb-3"}
 								id={propertiesAsPlaceholder ? "placeholder" : "total-orders"}
-								style={{ height: `${cardHeight}px`, overflow: "hidden", position: "relative" }}
+								style={{
+									height: `${i === 0 && firstPlaceholderHeight != null ? firstPlaceholderHeight : cardHeight}px`,
+									overflow: "hidden",
+									position: "relative",
+									...(i === 0 && firstPlaceholderImage
+										? { backgroundImage: `url('${firstPlaceholderImage}')`, backgroundSize: "cover", backgroundPosition: "center" }
+										: {}),
+								}}
 							>
 								<div className="card-header">
 									<h5 className={propertiesHeadingBlack && !propertiesAsPlaceholder ? "card-title properties-heading-black" : "card-title"}>

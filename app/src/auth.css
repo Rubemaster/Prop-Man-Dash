@@ -1,8 +1,21 @@
 .auth-wrapper {
 	min-height: 100vh;
 	width: 100%;
-	background: #f4f4f5;
+	position: relative;
+	background: url("/img/login-bg.jpg") center / cover no-repeat;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.auth-wrapper::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.auth-wrapper > * {
+	position: relative;
+	z-index: 1;
 }

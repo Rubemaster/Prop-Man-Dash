@@ -60,7 +60,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 												textAlign: "left",
 												color: "#fff",
 												fontWeight: "bold",
-												fontSize: "1.75rem",
+												fontSize: "1.5rem",
 											}}
 										>
 											Learn More About Rooftraq

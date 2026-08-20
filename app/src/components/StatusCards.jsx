@@ -3,10 +3,16 @@ import { Link } from "react-router-dom";
 export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false, firstPlaceholderHeight = null, firstPlaceholderImage = null }) {
 	return (
 		<div className="row">
-			{Array.from({ length: propertiesRepeat }).map((_, i) => (
+			{Array.from({ length: propertiesRepeat }).map((_, i) => {
+				const isImageCard = i === 0 && firstPlaceholderImage;
+				const CardLink = isImageCard ? "a" : Link;
+				const linkProps = isImageCard
+					? { href: "https://rooftraq.com", target: "_blank", rel: "noopener noreferrer" }
+					: { to: "/properties" };
+				return (
 				<div className="col" key={`properties-${i}`}>
 					<div className="col-md">
-						<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>
+						<CardLink {...linkProps} style={{ color: "inherit", textDecoration: "none" }}>
 							<div
 								className={propertiesAsPlaceholder ? "card text-center text-white mb-3 trailing-card-white" : "card text-center text-white mb-3"}
 								id={propertiesAsPlaceholder ? "placeholder" : "total-orders"}
@@ -62,10 +68,11 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 									</>
 								)}
 							</div>
-						</Link>
+						</CardLink>
 					</div>
 				</div>
-			))}
+				);
+			})}
 			{showOtherCards && (
 				<>
 					<div className="col">

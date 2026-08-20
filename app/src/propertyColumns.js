@@ -1,11 +1,12 @@
 export const PROPERTY_COLUMNS = [
-	{ key: "address", label: "Address" },
+	{ key: "address", label: "Address", width: 200 },
 	{ key: "city", label: "City" },
 	{ key: "zip", label: "Zip" },
 	{ key: "state", label: "State" },
 	{
 		key: "roofCondition",
 		label: "Roof Condition",
+		width: 200,
 		options: [
 			"Good in need of check up",
 			"Worn, in need of small repairs",

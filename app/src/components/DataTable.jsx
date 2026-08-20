@@ -23,7 +23,7 @@ function measureButtonWidth(label) {
 export default function DataTable({ columns, rows, actionLabel, onAction }) {
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
-	const colWidths = columns.map(() => 100);
+	const colWidths = columns.map((c) => c.width || 100);
 
 	if (actionLabel && onAction) {
 		dataColumns.push({

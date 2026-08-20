@@ -99,4 +99,7 @@ body {
 .handsontable td {
 	background-color: #ffffff !important;
 	color: #000000 !important;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
 }

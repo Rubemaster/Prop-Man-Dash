@@ -168,10 +168,6 @@ body {
 	border: 1px solid #000000 !important;
 }
 
-.card-header.transparent-card-header {
-	background-color: transparent !important;
-}
-
 .extplorer-panel {
 	background-color: #e4e4e7;
 	color: #000000;

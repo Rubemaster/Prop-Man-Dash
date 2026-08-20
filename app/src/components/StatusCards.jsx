@@ -14,12 +14,9 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 									height: `${i === 0 && firstPlaceholderHeight != null ? firstPlaceholderHeight : cardHeight}px`,
 									overflow: "hidden",
 									position: "relative",
-									...(i === 0 && firstPlaceholderImage
-										? { backgroundImage: `url('${firstPlaceholderImage}')`, backgroundSize: "cover", backgroundPosition: "center" }
-										: {}),
 								}}
 							>
-								<div className={i === 0 && firstPlaceholderImage ? "card-header transparent-card-header" : "card-header"}>
+								<div className="card-header">
 									<h5 className={propertiesHeadingBlack && !propertiesAsPlaceholder ? "card-title properties-heading-black" : "card-title"}>
 										{propertiesAsPlaceholder ? "Placeholder" : "Properties"}
 									</h5>
@@ -28,6 +25,17 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 									<div className="card-body" style={{ position: "absolute", bottom: "24px", left: 0, right: 0 }}>
 										<h3 className="card-title">{total}</h3>
 									</div>
+								)}
+								{i === 0 && firstPlaceholderImage && (
+									<div
+										style={{
+											position: "absolute",
+											inset: 0,
+											backgroundImage: `url('${firstPlaceholderImage}')`,
+											backgroundSize: "cover",
+											backgroundPosition: "center",
+										}}
+									/>
 								)}
 							</div>
 						</Link>

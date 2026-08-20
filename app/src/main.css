@@ -130,6 +130,10 @@ body {
 	justify-content: flex-start;
 }
 
+.handsontable tbody th {
+	border-right: 2px solid #a6cbe8 !important;
+}
+
 .handsontable td {
 	background-color: #ffffff !important;
 	color: #000000 !important;

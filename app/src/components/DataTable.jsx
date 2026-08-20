@@ -1,6 +1,12 @@
 import { HotTable } from "@handsontable/react-wrapper";
+import { registerPlugin } from "handsontable/plugins/registry";
+import { ManualColumnResize } from "handsontable/plugins/manualColumnResize";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
+
+// @handsontable/react-wrapper uses the unregistered "handsontable/base"
+// build, so plugins (like cell types) must be registered explicitly.
+registerPlugin(ManualColumnResize);
 
 const CELL_PADDING_PX = 24; // Handsontable's own <td> padding + safety margin
 

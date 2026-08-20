@@ -2,7 +2,7 @@ import { HotTable } from "@handsontable/react-wrapper";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
 
-const BUTTON_PADDING_PX = 32; // left+right padding + border of a Bootstrap btn-sm
+const BUTTON_PADDING_PX = 56; // btn-sm padding + border + Handsontable's own cell padding
 
 function measureTextWidth(text) {
 	const canvas = measureTextWidth._canvas || (measureTextWidth._canvas = document.createElement("canvas"));
@@ -27,6 +27,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				btn.type = "button";
 				btn.textContent = actionLabel;
 				btn.className = "btn btn-sm btn-clerk-purple";
+				btn.style.whiteSpace = "nowrap";
 				btn.onclick = () => onAction(row, rowData);
 				td.appendChild(btn);
 				return td;

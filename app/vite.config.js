@@ -56,10 +56,10 @@ function pagesFunctionsDevPlugin() {
     name: 'pages-functions-dev',
     async configureServer(server) {
       const { onRequestGet } = await server.ssrLoadModule('/functions/api/property-entries.js')
-      const { onRequestPost } = await server.ssrLoadModule('/functions/api/fillout-webhook.js')
+      const { onRequestPost } = await server.ssrLoadModule('/functions/api/fillout.js')
 
       server.middlewares.use('/api/property-entries', toNodeMiddleware(onRequestGet, env))
-      server.middlewares.use('/api/fillout-webhook', toNodeMiddleware(onRequestPost, env))
+      server.middlewares.use('/api/fillout', toNodeMiddleware(onRequestPost, env))
     },
   }
 }

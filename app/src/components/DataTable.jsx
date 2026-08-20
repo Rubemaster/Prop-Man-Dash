@@ -72,6 +72,15 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 		hotRef.current?.hotInstance?.loadData(rows);
 	}, [rows]);
 
+	useEffect(() => {
+		const hot = hotRef.current?.hotInstance;
+		if (!hot) return;
+		const container = hot.rootElement;
+		console.warn("[datatable-debug] container width", container.getBoundingClientRect().width, container.offsetWidth);
+		console.warn("[datatable-debug] table width", hot.view?._wt?.wtTable?.getWidth?.());
+		console.warn("[datatable-debug] parent width", container.parentElement.getBoundingClientRect().width);
+	});
+
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
 	const colWidths = columns.map((c) => c.width || (c.autoWidth ? autoFitWidth(c, rows) : 100));

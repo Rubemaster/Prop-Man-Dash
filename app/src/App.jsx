@@ -6,6 +6,7 @@ import UserDashboard from "./pages/UserDashboard";
 import Properties from "./pages/Properties";
 import InspectionsPending from "./pages/InspectionsPending";
 import Results from "./pages/Results";
+import Projects from "./pages/Projects";
 
 export default function App() {
 	return (
@@ -17,6 +18,7 @@ export default function App() {
 			<Route path="/properties" element={<Protected><Properties /></Protected>} />
 			<Route path="/inspections-pending" element={<Protected><InspectionsPending /></Protected>} />
 			<Route path="/results" element={<Protected><Results /></Protected>} />
+			<Route path="/projects" element={<Protected><Projects /></Protected>} />
 
 			<Route path="*" element={<Navigate to="/user" replace />} />
 		</Routes>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false, firstPlaceholderHeight = null, firstPlaceholderImage = null }) {
+export default function StatusCards({ total = 0, delivered = 0, pending = 0, projects = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false, firstPlaceholderHeight = null, firstPlaceholderImage = null, showProjectsCard = false }) {
 	return (
 		<div className="row">
 			{Array.from({ length: propertiesRepeat }).map((_, i) => {
@@ -100,6 +100,20 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 						</div>
 					</div>
 				</>
+			)}
+			{showProjectsCard && (
+				<div className="col">
+					<div className="col-md">
+						<Link to="/projects" style={{ color: "inherit", textDecoration: "none" }}>
+							<div className="card text-center text-white mb-3" id="orders-projects" style={{ height: `${cardHeight}px`, overflow: "hidden", position: "relative" }}>
+								<div className="card-header"><h5 className="card-title">Projects</h5></div>
+								<div className="card-body" style={{ position: "absolute", bottom: "24px", left: 0, right: 0 }}>
+									<h3 className="card-title">{projects}</h3>
+								</div>
+							</div>
+						</Link>
+					</div>
+				</div>
 			)}
 			{Array.from({ length: trailingCards }).map((_, i) => (
 				<div className="col" key={`trailing-${i}`}>

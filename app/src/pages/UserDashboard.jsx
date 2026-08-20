@@ -25,7 +25,7 @@ export default function UserDashboard() {
 			<div style={{ minHeight: "100vh" }}>
 				<Navbar variant="customer" />
 				<br />
-				<StatusCards total={propertyCount} delivered={inspectionCount} trailingCards={1} propertiesHeadingBlack={false} />
+				<StatusCards total={propertyCount} delivered={inspectionCount} showProjectsCard propertiesHeadingBlack={false} />
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} hidePropertiesContent propertiesRepeat={4} showOtherCards={false} cardHeight={30} propertiesAsPlaceholder firstPlaceholderHeight={500} firstPlaceholderImage="/img/learn-more-bg.png" />
 				<br />

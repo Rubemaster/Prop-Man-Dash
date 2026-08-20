@@ -69,7 +69,9 @@ export default function SupportChat() {
 
 	useEffect(() => {
 		return () => {
-			clientRef.current?.disconnectUser();
+			if (clientRef.current && clientRef.current !== "connecting") {
+				clientRef.current.disconnectUser();
+			}
 		};
 	}, []);
 

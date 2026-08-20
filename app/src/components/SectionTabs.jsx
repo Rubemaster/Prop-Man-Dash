@@ -20,7 +20,7 @@ export default function SectionTabs() {
 							key={tab.path}
 							type="button"
 							onClick={() => navigate(tab.path)}
-							style={active ? { all: "revert", backgroundColor: "#d6ecff", borderBottom: "none", borderLeft: "none", paddingBottom: "-2px" } : { all: "revert", borderBottom: "none", borderLeft: "none", paddingBottom: "-2px" }}
+							style={active ? { all: "revert", backgroundColor: "#d6ecff", borderBottom: "none", borderLeft: "none", marginBottom: "-2px" } : { all: "revert", borderBottom: "none", borderLeft: "none", marginBottom: "-2px" }}
 						>
 							{tab.label}
 						</button>

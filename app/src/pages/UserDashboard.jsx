@@ -42,6 +42,8 @@ export default function UserDashboard() {
 						</a>
 					</div>
 				</div>
+				<div className="col" />
+				<div className="col" />
 			</div>
 			<br />
 		</>

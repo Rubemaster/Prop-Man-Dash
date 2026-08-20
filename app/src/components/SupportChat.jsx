@@ -16,6 +16,12 @@ export default function SupportChat() {
 	// badge is live even while the panel is collapsed.
 	useEffect(() => {
 		if (!user?.id || clientRef.current) return;
+		// Set synchronously, before the first await -- React StrictMode
+		// double-invokes this effect back-to-back in dev, and both
+		// invocations would otherwise race past this guard before either
+		// finishes, firing connectUser twice (this is what caused the
+		// "Consecutive calls to connectUser" warning).
+		clientRef.current = "connecting";
 		let cancelled = false;
 
 		(async () => {

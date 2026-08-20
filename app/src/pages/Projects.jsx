@@ -12,7 +12,7 @@ export default function Projects() {
 				<div className="row">
 					<div className="col-md">
 						<iframe
-							src="/extplorer/index.html"
+							src="/extplorer/index.html?context=projects"
 							title="Projects file explorer"
 							style={{ width: "100%", height: "600px", border: "none", display: "block" }}
 						/>

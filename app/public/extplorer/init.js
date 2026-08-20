@@ -9,10 +9,13 @@ Ext.BLANK_IMAGE_URL = "scripts/extjs3/resources/images/default/s.gif";
 Ext.onReady(function () {
 	Ext.QuickTips.init();
 
+	var isProjects = new URLSearchParams(window.location.search).get("context") === "projects";
+	var emptyLabel = isProjects ? "No project history" : "No result files";
+
 	var fileGrid = new Ext.Panel({
 		region: "center",
 		layout: "fit",
-		html: '<div style="padding:20px;color:#777;font-style:italic;">No result files yet.</div>',
+		html: '<div style="padding:20px;color:#777;font-style:italic;">' + emptyLabel + ' yet.</div>',
 	});
 
 	var statusBar = new Ext.ux.StatusBar({
@@ -42,7 +45,9 @@ Ext.onReady(function () {
 			click: function (node) {
 				statusBar.setText(node === root ? properties.length + " object(s)" : "0 object(s)");
 				fileGrid.body.update(
-					'<div style="padding:20px;color:#777;font-style:italic;">No result files in "' +
+					'<div style="padding:20px;color:#777;font-style:italic;">' +
+						emptyLabel +
+						' in "' +
 						Ext.util.Format.htmlEncode(node.text) +
 						'" yet.</div>'
 				);

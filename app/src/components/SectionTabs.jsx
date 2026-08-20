@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 
 const TABS = [
-	{ label: "Properties", path: "/properties" },
+	{ label: "My Properties", path: "/properties" },
 	{ label: "Inspections Pending", path: "/inspections-pending" },
 	{ label: "Results", path: "/results" },
 	{ label: "Projects", path: "/projects" },

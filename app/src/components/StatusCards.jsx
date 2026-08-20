@@ -24,7 +24,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, pro
 							>
 								<div className="card-header">
 									<h5 className={propertiesHeadingBlack && !propertiesAsPlaceholder ? "card-title properties-heading-black" : "card-title"}>
-										{propertiesAsPlaceholder ? "Placeholder" : "Properties"}
+										{propertiesAsPlaceholder ? "Placeholder" : "My Properties"}
 									</h5>
 								</div>
 								{!hidePropertiesContent && (

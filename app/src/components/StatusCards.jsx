@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false }) {
+export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true, propertiesAsPlaceholder = false, showLearnMoreCard = false }) {
 	return (
 		<div className="row">
 			{Array.from({ length: propertiesRepeat }).map((_, i) => (
@@ -66,6 +66,15 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 					</div>
 				</div>
 			))}
+			{showLearnMoreCard && (
+				<div className="col">
+					<div className="col-md">
+						<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
+							<span className="learn-more-card-heading">Learn More About Rooftraq</span>
+						</a>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -55,7 +55,12 @@ export default function InspectionsPending() {
 				(properties.responses || []).map((p) => [p.submissionId, extractAddress(p)])
 			);
 
-			setRows((inspections.responses || []).map((sub) => mapSubmission(sub, addressByPropertyId)));
+			const mapped = (inspections.responses || []).map((sub) => mapSubmission(sub, addressByPropertyId));
+			console.warn(
+				`[inspections-debug] ${new Date().toISOString()} fetched ${mapped.length} rows:`,
+				mapped.map((r) => `${r.submissionId} (${r.propertyAddress})`)
+			);
+			setRows(mapped);
 		} finally {
 			setLoading(false);
 		}

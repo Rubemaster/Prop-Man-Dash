@@ -74,7 +74,12 @@ export default function Properties() {
 		try {
 			const res = await fetch(`/api/property-entries?t=${Date.now()}`, { cache: "no-store" });
 			const data = await res.json();
-			setRows((data.responses || []).map(mapSubmission));
+			const mapped = (data.responses || []).map(mapSubmission);
+			console.warn(
+				`[properties-debug] ${new Date().toISOString()} fetched ${mapped.length} rows:`,
+				mapped.map((r) => `${r.submissionId} (${r.address})`)
+			);
+			setRows(mapped);
 		} finally {
 			setLoading(false);
 		}

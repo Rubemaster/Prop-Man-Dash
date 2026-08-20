@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
+import Footer from "../components/Footer";
 import { PROPERTY_COLUMNS } from "../propertyColumns";
 
 const FILLOUT_SCRIPT_SRC = "https://server.fillout.com/embed/v1/";
@@ -131,6 +132,7 @@ export default function Properties() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 }

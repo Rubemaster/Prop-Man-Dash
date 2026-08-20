@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import SectionTabs from "../components/SectionTabs";
+import Footer from "../components/Footer";
 
 export default function Results() {
 	return (
@@ -16,6 +17,7 @@ export default function Results() {
 					/>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 }

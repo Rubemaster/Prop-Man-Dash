@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
+import Footer from "../components/Footer";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
 
 export default function InspectionsPending() {
@@ -74,6 +75,7 @@ export default function InspectionsPending() {
 					</div>
 				</div>
 			</div>
+			<Footer />
 		</>
 	);
 }

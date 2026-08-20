@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import StatusCards from "../components/StatusCards";
+import Footer from "../components/Footer";
 
 export default function UserDashboard() {
 	const { user } = useUser();
@@ -37,6 +38,7 @@ export default function UserDashboard() {
 				<div className="col" />
 			</div>
 			<br />
+			<Footer />
 		</>
 	);
 }

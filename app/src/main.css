@@ -83,6 +83,14 @@ body {
 	color: #ffffff !important;
 }
 
+.extplorer-panel {
+	background-color: #ffffff;
+	color: #000000;
+	border: 2px solid #a6cbe8;
+	border-bottom-width: 6px;
+	padding: 1.25rem;
+}
+
 .btn-clerk-purple {
 	background-color: #6b7280 !important;
 	border: none !important;

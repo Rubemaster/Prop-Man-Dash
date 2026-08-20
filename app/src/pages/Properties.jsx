@@ -97,7 +97,7 @@ export default function Properties() {
 			<br />
 			<div className="row">
 				<div className="col-md">
-					<div className="card card-body">
+					<div className="extplorer-panel">
 						<DataTable
 							columns={PROPERTY_COLUMNS}
 							rows={rows}

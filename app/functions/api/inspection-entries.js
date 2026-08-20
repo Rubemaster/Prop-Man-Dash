@@ -1,10 +1,18 @@
 import { createClerkClient } from "@clerk/backend";
-import { getInspectionSubmissionIds } from "../_shared/clerk.js";
 
-const FILLOUT_FORM_ID = "tSESngGoRKus";
+// Same Zite Database + table as functions/api/property-entries.js -- both
+// properties and inspections land as rows in this one table. A row is an
+// inspection (rather than a property) when its `propertyid` field is set,
+// since an inspection references the property it's for.
+const DATABASE_ID = "2dd78faa4f50c865";
+const TABLE_ID = "ta1SM8LKtyo";
+const FIELD = {
+	notes: "f2pqWb6Qc6v",
+	clerkuserid: "fiWGpD8dCa4",
+	propertyid: "feq3sfQMyHY",
+};
 const NO_STORE_HEADERS = { "Content-Type": "application/json", "Cache-Control": "no-store" };
 
-// Mirrors functions/api/property-entries.js but for inspection requests.
 export async function onRequestGet({ request, env }) {
 	const clerkClient = createClerkClient({
 		secretKey: env.CLERK_SECRET_KEY,
@@ -22,18 +30,31 @@ export async function onRequestGet({ request, env }) {
 	}
 
 	const { userId } = toAuth();
-	const ownedIds = await getInspectionSubmissionIds(userId, env.CLERK_SECRET_KEY);
-
-	if (ownedIds.length === 0) {
-		return new Response(JSON.stringify({ responses: [] }), { headers: NO_STORE_HEADERS });
-	}
 
 	const upstream = await fetch(
-		`https://api.fillout.com/v1/api/forms/${FILLOUT_FORM_ID}/submissions?t=${Date.now()}`,
-		{ headers: { Authorization: `Bearer ${env.FILLOUT_API}` }, cache: "no-store" }
+		`https://tables.zite.com/api/v1/bases/${DATABASE_ID}/tables/${TABLE_ID}/records/list`,
+		{
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${env.FILLOUT_API}`,
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				limit: 500,
+				filter: { field: FIELD.clerkuserid, equals: userId },
+			}),
+			cache: "no-store",
+		}
 	);
 	const data = await upstream.json();
-	const responses = (data.responses || []).filter((sub) => ownedIds.includes(sub.submissionId));
 
-	return new Response(JSON.stringify({ responses }), { headers: NO_STORE_HEADERS });
+	const inspections = (data.records || [])
+		.filter((record) => record.data[FIELD.propertyid])
+		.map((record) => ({
+			submissionId: record.id,
+			propertyId: record.data[FIELD.propertyid],
+			notes: record.data[FIELD.notes] || "",
+		}));
+
+	return new Response(JSON.stringify({ inspections }), { headers: NO_STORE_HEADERS });
 }

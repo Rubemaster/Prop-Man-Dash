@@ -7,22 +7,6 @@ import { PROPERTY_COLUMNS } from "../propertyColumns";
 const FILLOUT_SCRIPT_SRC = "https://server.fillout.com/embed/v1/";
 const INSPECTION_FORM_ID = "tSESngGoRKus";
 
-function mapSubmission(sub) {
-	const byId = Object.fromEntries((sub.questions || []).map((q) => [q.id, q.value]));
-	const addr = byId["x8sa"] || {};
-	return {
-		submissionId: sub.submissionId,
-		address: typeof addr === "object" ? addr.address1 || addr.address || "" : addr || "",
-		city: typeof addr === "object" ? addr.city || "" : "",
-		zip: typeof addr === "object" ? addr.zip || addr.zipCode || "" : "",
-		state: typeof addr === "object" ? addr.state || "" : "",
-		roofCondition: byId["oLS5"] || "",
-		roofType: byId["5tsX"] || "",
-		houseAge: byId["bH4K"] || "",
-		notes: byId["4dJT"] || "",
-	};
-}
-
 // Fillout's embed script only scans the DOM for popup triggers once,
 // synchronously, when it loads -- there's no re-scan and no MutationObserver
 // (confirmed by reading the script directly). That works for the single,
@@ -74,12 +58,12 @@ export default function Properties() {
 		try {
 			const res = await fetch(`/api/property-entries?t=${Date.now()}`, { cache: "no-store" });
 			const data = await res.json();
-			const mapped = (data.responses || []).map(mapSubmission);
+			const properties = data.properties || [];
 			console.warn(
-				`[properties-debug] ${new Date().toISOString()} fetched ${mapped.length} rows:`,
-				mapped.map((r) => `${r.submissionId} (${r.address})`)
+				`[properties-debug] ${new Date().toISOString()} fetched ${properties.length} rows:`,
+				properties.map((r) => `${r.submissionId} (${r.address})`)
 			);
-			setRows(mapped);
+			setRows(properties);
 		} finally {
 			setLoading(false);
 		}

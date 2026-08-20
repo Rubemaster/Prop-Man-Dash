@@ -15,10 +15,10 @@ export default function UserDashboard() {
 		const bust = Date.now();
 		fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" })
 			.then((res) => res.json())
-			.then((data) => setPropertyCount((data.responses || []).length));
+			.then((data) => setPropertyCount((data.properties || []).length));
 		fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" })
 			.then((res) => res.json())
-			.then((data) => setInspectionCount((data.responses || []).length));
+			.then((data) => setInspectionCount((data.inspections || []).length));
 	}, [user?.id]);
 
 	return (

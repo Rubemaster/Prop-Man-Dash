@@ -4,37 +4,6 @@ import Navbar from "../components/Navbar";
 import DataTable from "../components/DataTable";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
 
-const EMPTY_ADDRESS = { address: "", city: "", zip: "", state: "" };
-
-function extractAddress(sub) {
-	const addr = (sub.questions || []).find((q) => q.id === "x8sa")?.value;
-	if (!addr || typeof addr !== "object") return EMPTY_ADDRESS;
-
-	return {
-		address: addr.address1 || addr.address || "",
-		city: addr.city || "",
-		zip: addr.zip || addr.zipCode || "",
-		state: addr.state || "",
-	};
-}
-
-function mapSubmission(sub, addressByPropertyId) {
-	const propertyId =
-		(sub.urlParameters || []).find((p) => p.name === "propertyid" || p.id === "propertyid")
-			?.value?.trim() || "";
-	const { address, city, zip, state } = addressByPropertyId[propertyId] || EMPTY_ADDRESS;
-
-	return {
-		submissionId: sub.submissionId,
-		propertyAddress: address || propertyId,
-		city,
-		zip,
-		state,
-		status: "Pending",
-		notes: "",
-	};
-}
-
 export default function InspectionsPending() {
 	const { user } = useUser();
 	const [rows, setRows] = useState([]);
@@ -48,14 +17,24 @@ export default function InspectionsPending() {
 				fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
 				fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
 			]);
-			const inspections = await inspectionsRes.json();
-			const properties = await propertiesRes.json();
+			const { inspections = [] } = await inspectionsRes.json();
+			const { properties = [] } = await propertiesRes.json();
 
-			const addressByPropertyId = Object.fromEntries(
-				(properties.responses || []).map((p) => [p.submissionId, extractAddress(p)])
-			);
+			const propertyById = Object.fromEntries(properties.map((p) => [p.submissionId, p]));
 
-			const mapped = (inspections.responses || []).map((sub) => mapSubmission(sub, addressByPropertyId));
+			const mapped = inspections.map((insp) => {
+				const property = propertyById[insp.propertyId];
+				return {
+					submissionId: insp.submissionId,
+					propertyAddress: property?.address || insp.propertyId,
+					city: property?.city || "",
+					zip: property?.zip || "",
+					state: property?.state || "",
+					status: "Pending",
+					notes: insp.notes,
+				};
+			});
+
 			console.warn(
 				`[inspections-debug] ${new Date().toISOString()} fetched ${mapped.length} rows:`,
 				mapped.map((r) => `${r.submissionId} (${r.propertyAddress})`)

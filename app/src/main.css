@@ -8,6 +8,10 @@ body {
 	background-color: #000000;
 }
 
+.str-chat {
+	--str-chat__font-family: Arial, Helvetica, sans-serif;
+}
+
 #total-orders,
 #orders-delivered,
 #orders-pending {

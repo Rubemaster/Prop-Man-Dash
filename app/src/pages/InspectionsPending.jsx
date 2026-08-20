@@ -55,22 +55,24 @@ export default function InspectionsPending() {
 
 	return (
 		<>
-			<Navbar variant="customer" />
-			<SectionTabs />
-			<br />
-			<div className="row">
-				<div className="col-md">
-					<div className="extplorer-panel">
-						<DataTable columns={INSPECTION_COLUMNS} rows={rows} />
-						<div className="extplorer-panel-footer">
-							<button
-								type="button"
-								style={{ all: "revert" }}
-								onClick={refresh}
-								disabled={loading}
-							>
-								{loading ? "Refreshing..." : "Refresh"}
-							</button>
+			<div style={{ minHeight: "100vh" }}>
+				<Navbar variant="customer" />
+				<SectionTabs />
+				<br />
+				<div className="row">
+					<div className="col-md">
+						<div className="extplorer-panel">
+							<DataTable columns={INSPECTION_COLUMNS} rows={rows} />
+							<div className="extplorer-panel-footer">
+								<button
+									type="button"
+									style={{ all: "revert" }}
+									onClick={refresh}
+									disabled={loading}
+								>
+									{loading ? "Refreshing..." : "Refresh"}
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

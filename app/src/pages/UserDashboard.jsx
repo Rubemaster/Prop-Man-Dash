@@ -22,22 +22,24 @@ export default function UserDashboard() {
 
 	return (
 		<>
-			<Navbar variant="customer" />
-			<br />
-			<StatusCards total={propertyCount} delivered={inspectionCount} />
-			<br />
-			<div className="row">
-				<div className="col">
-					<div className="col-md">
-						<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
-							<span className="learn-more-card-heading">Learn More About Rooftraq</span>
-						</a>
+			<div style={{ minHeight: "100vh" }}>
+				<Navbar variant="customer" />
+				<br />
+				<StatusCards total={propertyCount} delivered={inspectionCount} />
+				<br />
+				<div className="row">
+					<div className="col">
+						<div className="col-md">
+							<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
+								<span className="learn-more-card-heading">Learn More About Rooftraq</span>
+							</a>
+						</div>
 					</div>
+					<div className="col" />
+					<div className="col" />
 				</div>
-				<div className="col" />
-				<div className="col" />
+				<br />
 			</div>
-			<br />
 			<Footer />
 		</>
 	);

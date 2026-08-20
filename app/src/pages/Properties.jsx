@@ -93,41 +93,43 @@ export default function Properties() {
 
 	return (
 		<>
-			<Navbar variant="customer" />
-			<SectionTabs />
-			<br />
-			<div className="row">
-				<div className="col-md">
-					<div className="extplorer-panel">
-						<DataTable
-							columns={PROPERTY_COLUMNS}
-							rows={rows}
-							actionLabel="New Inspection"
-							onAction={requestInspection}
-						/>
-						<div className="extplorer-panel-footer">
-							<button
-								type="button"
-								style={{ all: "revert" }}
-								onClick={refresh}
-								disabled={loading}
-							>
-								{loading ? "Refreshing..." : "Refresh"}
-							</button>
-							{user?.id && (
+			<div style={{ minHeight: "100vh" }}>
+				<Navbar variant="customer" />
+				<SectionTabs />
+				<br />
+				<div className="row">
+					<div className="col-md">
+						<div className="extplorer-panel">
+							<DataTable
+								columns={PROPERTY_COLUMNS}
+								rows={rows}
+								actionLabel="New Inspection"
+								onAction={requestInspection}
+							/>
+							<div className="extplorer-panel-footer">
 								<button
 									type="button"
 									style={{ all: "revert" }}
-									data-fillout-id="3PFLPZSWoFus"
-									data-fillout-embed-type="popup"
-									data-fillout-dynamic-resize
-									data-fillout-inherit-parameters
-									data-fillout-popup-size="medium"
-									data-clerkuserid={user.id}
+									onClick={refresh}
+									disabled={loading}
 								>
-									Add Property
+									{loading ? "Refreshing..." : "Refresh"}
 								</button>
-							)}
+								{user?.id && (
+									<button
+										type="button"
+										style={{ all: "revert" }}
+										data-fillout-id="3PFLPZSWoFus"
+										data-fillout-embed-type="popup"
+										data-fillout-dynamic-resize
+										data-fillout-inherit-parameters
+										data-fillout-popup-size="medium"
+										data-clerkuserid={user.id}
+									>
+										Add Property
+									</button>
+								)}
+							</div>
 						</div>
 					</div>
 				</div>

@@ -5,11 +5,13 @@ import DataTable from "../components/DataTable";
 import { PROPERTY_COLUMNS, PROPERTY_SAMPLE_ROW } from "../propertyColumns";
 
 const FILLOUT_SCRIPT_SRC = "https://server.fillout.com/embed/v1/";
+const INSPECTION_FORM_ID = "tSESngGoRKus";
 
 function mapSubmission(sub) {
 	const byId = Object.fromEntries((sub.questions || []).map((q) => [q.id, q.value]));
 	const addr = byId["x8sa"] || {};
 	return {
+		submissionId: sub.submissionId,
 		address: typeof addr === "object" ? addr.address1 || addr.address || "" : addr || "",
 		city: typeof addr === "object" ? addr.city || "" : "",
 		zip: typeof addr === "object" ? addr.zip || addr.zipCode || "" : "",
@@ -21,18 +23,44 @@ function mapSubmission(sub) {
 	};
 }
 
+// Fillout's embed script only scans the DOM for popup triggers once,
+// synchronously, when it loads -- there's no re-scan and no MutationObserver
+// (confirmed by reading the script directly). That works for the single,
+// always-present "Add Property" button, but per-row inspection buttons are
+// created dynamically by Handsontable long after the script has already run.
+// So instead we build a fresh hidden trigger with the right data-* params,
+// force the script to re-execute (which wires up *this* trigger's onclick),
+// then click it programmatically -- reusing Fillout's real popup logic
+// rather than reimplementing it.
+function openInspectionPopup(propertyId, clerkUserId) {
+	document.getElementById("inspection-fillout-trigger")?.remove();
+
+	const trigger = document.createElement("button");
+	trigger.id = "inspection-fillout-trigger";
+	trigger.type = "button";
+	trigger.style.display = "none";
+	trigger.setAttribute("data-fillout-id", INSPECTION_FORM_ID);
+	trigger.setAttribute("data-fillout-embed-type", "popup");
+	trigger.setAttribute("data-fillout-dynamic-resize", "");
+	trigger.setAttribute("data-fillout-inherit-parameters", "");
+	trigger.setAttribute("data-fillout-popup-size", "medium");
+	trigger.setAttribute("data-propertyid", propertyId ?? "");
+	trigger.setAttribute("data-clerkuserid", clerkUserId ?? "");
+	document.body.appendChild(trigger);
+
+	document.querySelectorAll(`script[src="${FILLOUT_SCRIPT_SRC}"]`).forEach((s) => s.remove());
+	const script = document.createElement("script");
+	script.src = FILLOUT_SCRIPT_SRC;
+	script.onload = () => trigger.click();
+	document.body.appendChild(script);
+}
+
 export default function Properties() {
 	const { user } = useUser();
 	const [rows, setRows] = useState([PROPERTY_SAMPLE_ROW]);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		// Fillout's embed script bakes the popup iframe's src (including all
-		// data-* params) once, synchronously, the moment it loads -- there's no
-		// re-scan and no MutationObserver. So we can't load it until the button
-		// below actually has the real data-clerkuserid value in the DOM, and we
-		// must re-inject a fresh <script> (not skip if one exists) on every
-		// mount so revisits to this page get scanned again too.
 		if (!user?.id) return;
 		document.querySelectorAll(`script[src="${FILLOUT_SCRIPT_SRC}"]`).forEach((s) => s.remove());
 		const script = document.createElement("script");
@@ -60,7 +88,7 @@ export default function Properties() {
 	}, [user?.id]);
 
 	const requestInspection = (rowIndex, rowData) => {
-		console.log("Requesting new inspection for", rowData);
+		openInspectionPopup(rowData.submissionId, user?.id);
 	};
 
 	return (

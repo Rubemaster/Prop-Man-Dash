@@ -28,6 +28,7 @@ export const PROPERTY_COLUMNS = [
 ];
 
 export const PROPERTY_SAMPLE_ROW = {
+	submissionId: "sample",
 	address: "123 Main St",
 	city: "Springfield",
 	zip: "62704",

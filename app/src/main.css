@@ -87,8 +87,17 @@ body {
 	background-color: #ffffff;
 	color: #000000;
 	border: 2px solid #a6cbe8;
-	border-bottom-width: 6px;
+	border-bottom: none;
 	padding: 1.25rem;
+}
+
+.extplorer-panel-footer {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin: 1.25rem -1.25rem -1.25rem;
+	padding: 12px 1.25rem;
+	background-color: #a6cbe8;
 }
 
 .btn-clerk-purple {

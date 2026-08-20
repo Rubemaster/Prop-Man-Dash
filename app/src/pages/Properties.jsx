@@ -104,7 +104,7 @@ export default function Properties() {
 							actionLabel="New Inspection"
 							onAction={requestInspection}
 						/>
-						<div className="mb-3" style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
+						<div className="extplorer-panel-footer">
 							<button
 								type="button"
 								style={{ all: "revert" }}

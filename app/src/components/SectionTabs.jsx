@@ -38,7 +38,7 @@ export default function SectionTabs() {
 					);
 				})}
 			</div>
-			<div style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", borderBottom: "1px solid #a6cbe8" }} />
+			<div style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", borderBottom: "1px solid #000" }} />
 		</div>
 	);
 }

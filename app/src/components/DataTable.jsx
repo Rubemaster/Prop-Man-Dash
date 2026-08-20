@@ -111,7 +111,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				return td;
 			},
 		});
-		colHeaders.unshift("Actions");
+		colHeaders.unshift("Inspect Now");
 		colWidths.unshift(Math.ceil(measureButtonWidth(actionLabel)) + CELL_PADDING_PX);
 	}
 

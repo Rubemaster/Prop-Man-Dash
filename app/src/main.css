@@ -1,0 +1,90 @@
+body {
+	background-color: #ffffff;
+	color: #000000;
+}
+
+.dark {
+	background-color: #000000;
+}
+
+#total-orders,
+#orders-delivered,
+#orders-pending {
+	background-color: #000000;
+	color: #ffffff;
+}
+
+/* Flatten every Bootstrap color variant to plain black/white, no borders */
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info,
+.btn-light,
+.btn-dark {
+	background-color: #ffffff !important;
+	border: none !important;
+	border-radius: 0 !important;
+	color: #000000 !important;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-warning:hover,
+.btn-info:hover,
+.btn-light:hover,
+.btn-dark:hover {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+}
+
+.bg-info,
+.bg-light,
+.bg-dark,
+.bg-primary,
+.bg-success,
+.bg-danger,
+.bg-warning {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+
+.text-white {
+	color: #000000 !important;
+}
+
+.dark .text-white {
+	color: #ffffff !important;
+}
+
+.card,
+.card-header,
+.card-body {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.card a,
+.card p,
+.card h5,
+.card h3,
+.card h1,
+.card label {
+	color: #ffffff !important;
+}
+
+/* Handsontable grids sit inside black cards; keep the grid itself light with readable contrast */
+.handsontable th {
+	background-color: #e4e4e7 !important;
+	color: #000000 !important;
+}
+
+.handsontable td {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}

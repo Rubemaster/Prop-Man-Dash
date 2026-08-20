@@ -5,7 +5,8 @@ export default function BlankCards() {
 				display: "grid",
 				gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 300px))",
 				justifyContent: "center",
-				gap: "46px",
+				rowGap: "31px",
+				columnGap: "46px",
 				paddingLeft: "16px",
 				paddingRight: "16px",
 			}}

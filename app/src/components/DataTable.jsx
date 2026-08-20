@@ -85,6 +85,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				const rowData = instance.getSourceDataAtRow(row) || {};
 				const btn = makeActionButton(actionLabel);
 				if (rowData.__actionDisabled) {
+					btn.textContent = "Pending";
 					btn.disabled = true;
 					btn.style.backgroundColor = "#a1a1aa";
 					btn.style.cursor = "not-allowed";

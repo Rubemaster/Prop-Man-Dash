@@ -130,7 +130,8 @@ body {
 	justify-content: flex-start;
 }
 
-.handsontable tbody th {
+.handsontable tbody th,
+.handsontable thead th:first-child {
 	border-right: 2px solid #a6cbe8 !important;
 }
 

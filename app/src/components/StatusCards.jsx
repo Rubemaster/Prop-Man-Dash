@@ -13,7 +13,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 								style={{ height: `${cardHeight}px`, overflow: "hidden" }}
 							>
 								<div className="card-header">
-									<h5 className={propertiesHeadingBlack ? "card-title properties-heading-black" : "card-title"}>
+									<h5 className={propertiesHeadingBlack && !propertiesAsPlaceholder ? "card-title properties-heading-black" : "card-title"}>
 										{propertiesAsPlaceholder ? "Placeholder" : "Properties"}
 									</h5>
 								</div>
@@ -54,7 +54,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 					<div className="col-md">
 						<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>
 							<div className="card text-center text-white mb-3 trailing-card-white" id="placeholder" style={{ height: `${trailingCardHeight}px`, overflow: "hidden" }}>
-								<div className="card-header"><h5 className="card-title properties-heading-black">Placeholder</h5></div>
+								<div className="card-header"><h5 className="card-title">Placeholder</h5></div>
 							</div>
 						</Link>
 					</div>

@@ -1,8 +1,8 @@
 export const PROPERTY_COLUMNS = [
 	{ key: "address", label: "Address", width: 200 },
 	{ key: "city", label: "City" },
-	{ key: "zip", label: "Zip" },
-	{ key: "state", label: "State" },
+	{ key: "zip", label: "Zip", width: 70 },
+	{ key: "state", label: "State", width: 60 },
 	{
 		key: "roofCondition",
 		label: "Roof Condition",
@@ -16,6 +16,7 @@ export const PROPERTY_COLUMNS = [
 	{
 		key: "roofType",
 		label: "Roof Type",
+		width: 90,
 		options: ["Saddle", "Flat", "Other"],
 	},
 	{

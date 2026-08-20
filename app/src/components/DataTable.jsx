@@ -26,7 +26,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 	const colWidths = columns.map((c) => c.width || 100);
 
 	if (actionLabel && onAction) {
-		dataColumns.push({
+		dataColumns.unshift({
 			data: null,
 			readOnly: true,
 			renderer(instance, td, row) {
@@ -42,8 +42,8 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				return td;
 			},
 		});
-		colHeaders.push("Actions");
-		colWidths.push(Math.ceil(measureButtonWidth(actionLabel)) + CELL_PADDING_PX);
+		colHeaders.unshift("Actions");
+		colWidths.unshift(Math.ceil(measureButtonWidth(actionLabel)) + CELL_PADDING_PX);
 	}
 
 	return (
@@ -54,6 +54,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				colHeaders={colHeaders}
 				colWidths={colWidths}
 				rowHeaders={true}
+				rowHeaderWidth={35}
 				width="100%"
 				stretchH="all"
 				height="auto"

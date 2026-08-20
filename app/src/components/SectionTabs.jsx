@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TABS = [
 	{ label: "Properties", path: "/properties" },
@@ -7,24 +7,15 @@ const TABS = [
 ];
 
 export default function SectionTabs() {
-	const { pathname } = useLocation();
 	const navigate = useNavigate();
 
 	return (
-		<div style={{ display: "flex", gap: "4px", padding: "8px 16px 0" }}>
-			{TABS.map((tab) => {
-				const active = pathname === tab.path;
-				return (
-					<button
-						key={tab.path}
-						type="button"
-						disabled={active}
-						onClick={() => navigate(tab.path)}
-					>
-						{tab.label}
-					</button>
-				);
-			})}
+		<div>
+			{TABS.map((tab) => (
+				<button key={tab.path} type="button" onClick={() => navigate(tab.path)}>
+					{tab.label}
+				</button>
+			))}
 		</div>
 	);
 }

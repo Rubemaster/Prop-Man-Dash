@@ -11,9 +11,9 @@ export default function BlankCards() {
 				paddingRight: "16px",
 			}}
 		>
-			<div className="card" style={{ height: "200px" }} />
-			<div className="card" style={{ height: "200px" }} />
-			<div className="card" style={{ height: "200px" }} />
+			<div className="card" style={{ height: "180px" }} />
+			<div className="card" style={{ height: "180px" }} />
+			<div className="card" style={{ height: "180px" }} />
 		</div>
 	);
 }

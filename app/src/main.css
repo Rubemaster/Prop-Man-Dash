@@ -115,7 +115,7 @@ body {
 /* Handsontable grids sit inside black cards; keep the grid itself light with readable contrast */
 .handsontable {
 	--ht-font-family: Arial, Helvetica, sans-serif;
-	--ht-cell-selection-background-color: #a6cbe8;
+	--ht-cell-selection-background-color: #5b9bd5;
 	--ht-cell-selection-border-color: #a6cbe8;
 	--ht-accent-color: #a6cbe8;
 }

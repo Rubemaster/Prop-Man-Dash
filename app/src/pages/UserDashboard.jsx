@@ -30,16 +30,12 @@ export default function UserDashboard() {
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} />
 				<br />
-				<div className="row">
-					<div className="col">
-						<div className="col-md">
-							<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
-								<span className="learn-more-card-heading">Learn More About Rooftraq</span>
-							</a>
-						</div>
+				<div className="row" style={{ display: "flex" }}>
+					<div style={{ flex: "0 0 33.3333%", padding: "0 30px", boxSizing: "border-box" }}>
+						<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
+							<span className="learn-more-card-heading">Learn More About Rooftraq</span>
+						</a>
 					</div>
-					<div className="col" />
-					<div className="col" />
 				</div>
 				<br />
 			</div>

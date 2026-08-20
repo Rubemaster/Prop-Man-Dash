@@ -107,7 +107,7 @@ export default function Properties() {
 						<div className="mb-3" style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
 							<button
 								type="button"
-								className="btn btn-secondary"
+								style={{ all: "revert" }}
 								onClick={refresh}
 								disabled={loading}
 							>
@@ -116,13 +116,13 @@ export default function Properties() {
 							{user?.id && (
 								<button
 									type="button"
+									style={{ all: "revert" }}
 									data-fillout-id="3PFLPZSWoFus"
 									data-fillout-embed-type="popup"
 									data-fillout-dynamic-resize
 									data-fillout-inherit-parameters
 									data-fillout-popup-size="medium"
 									data-clerkuserid={user.id}
-									className="btn btn-primary"
 								>
 									Add Property
 								</button>

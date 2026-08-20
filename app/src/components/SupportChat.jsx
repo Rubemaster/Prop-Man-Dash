@@ -26,11 +26,15 @@ export default function SupportChat() {
 			);
 			if (cancelled) return;
 
-			// Stable channel per user -- messaging channels auto-create a member
-			// user stub for "support" the first time it's referenced.
+			// Matches the existing iOS app's StreamChatManager.swift exactly:
+			// same channel id scheme and the same real "support-team" Stream
+			// user (already created in this Stream app -- a plain "support"
+			// id doesn't exist and Stream rejects unknown member ids outright).
+			// connectUser already makes the current user a channel member
+			// implicitly, so only the support side needs listing.
 			const supportChannel = chatClient.channel("messaging", `support-${user.id}`, {
-				members: [user.id, "support"],
-				name: "Business Support",
+				members: ["support-team"],
+				name: user.primaryEmailAddress?.emailAddress || user.fullName || user.id,
 			});
 			await supportChannel.watch();
 			if (cancelled) return;

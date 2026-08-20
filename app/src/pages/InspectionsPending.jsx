@@ -59,17 +59,18 @@ export default function InspectionsPending() {
 			<br />
 			<div className="row">
 				<div className="col-md">
-					<div className="card card-body">
-						<button
-							type="button"
-							className="btn btn-secondary mb-3"
-							style={{ width: "fit-content" }}
-							onClick={refresh}
-							disabled={loading}
-						>
-							{loading ? "Refreshing..." : "Refresh"}
-						</button>
+					<div className="extplorer-panel">
 						<DataTable columns={INSPECTION_COLUMNS} rows={rows} />
+						<div className="extplorer-panel-footer">
+							<button
+								type="button"
+								style={{ all: "revert" }}
+								onClick={refresh}
+								disabled={loading}
+							>
+								{loading ? "Refreshing..." : "Refresh"}
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

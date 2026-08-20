@@ -20,14 +20,14 @@ export default function SectionTabs() {
 							key={tab.path}
 							type="button"
 							onClick={() => navigate(tab.path)}
-							style={active ? { all: "revert", backgroundColor: "#d6ecff", borderBottom: "none", borderLeft: "none", marginBottom: "-2px" } : { all: "revert", borderBottom: "none", borderLeft: "none", marginBottom: "-2px" }}
+							style={active ? { all: "revert", backgroundColor: "#d6ecff", borderBottom: "none", borderLeft: "none", marginBottom: "-2px", paddingRight: "2px" } : { all: "revert", borderBottom: "none", borderLeft: "none", marginBottom: "-2px", paddingRight: "2px" }}
 						>
 							{tab.label}
 						</button>
 					);
 				})}
 			</div>
-			<div style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", borderBottom: "2px solid #a6cbe8" }} />
+			<div style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", borderBottom: "1px solid #a6cbe8" }} />
 		</div>
 	);
 }

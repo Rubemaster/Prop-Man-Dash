@@ -5,7 +5,7 @@ import SupportChat from "./SupportChat";
 export default function Navbar({ variant }) {
 	return (
 		<nav className="navbar navbar-dark dark">
-			<img className="mr-4" src="/img/logoCRM.png" width="41" height="37" alt="CRM logo" />
+			<img className="mr-4" src="/img/navbar-logo.png" height="37" alt="Logo" />
 			<ul className="navbar-nav">
 				<li className="nav-item">
 					<Link className="nav-link" to="/user">Home</Link>

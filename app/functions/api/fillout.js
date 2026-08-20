@@ -6,7 +6,15 @@ import { addPropertySubmissionId } from "../_shared/clerk.js";
 // as a `data-clerkuserid` attribute, which Fillout's embed script turns into a
 // URL parameter and echoes back in `urlParameters` on submission.
 export async function onRequestPost({ request, env }) {
-	const payload = await request.json();
+	let payload;
+	try {
+		payload = await request.json();
+	} catch {
+		return new Response(JSON.stringify({ error: "invalid JSON body" }), {
+			status: 400,
+			headers: { "Content-Type": "application/json" },
+		});
+	}
 	const submission = payload.submission || payload;
 
 	const urlParameters = submission.urlParameters || [];

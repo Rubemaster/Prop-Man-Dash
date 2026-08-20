@@ -23,7 +23,12 @@ function loadRootEnv() {
 // functions/api run locally under Vite and in production on Cloudflare.
 function toNodeMiddleware(handler, env) {
   return async (req, res) => {
-    const url = new URL(req.url, `http://${req.headers.host}`)
+    // The Cloudflare Tunnel terminates TLS and forwards plain HTTP to this
+    // process, so req itself has no idea the outside world saw https:// --
+    // trust x-forwarded-proto (which the tunnel sets) or Clerk's origin
+    // check (authorizedParties) silently mismatches http vs https and 401s.
+    const proto = req.headers['x-forwarded-proto'] || 'http'
+    const url = new URL(req.url, `${proto}://${req.headers.host}`)
     const chunks = []
     for await (const chunk of req) chunks.push(chunk)
     const body = chunks.length ? Buffer.concat(chunks) : undefined

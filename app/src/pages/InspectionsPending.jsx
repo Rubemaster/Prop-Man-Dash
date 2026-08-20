@@ -7,7 +7,14 @@ import { INSPECTION_COLUMNS } from "../inspectionColumns";
 function extractAddress(sub) {
 	const addr = (sub.questions || []).find((q) => q.id === "x8sa")?.value;
 	if (!addr) return "";
-	return typeof addr === "object" ? addr.address1 || addr.address || "" : addr;
+	if (typeof addr !== "object") return addr;
+
+	const street = addr.address1 || addr.address || "";
+	const cityStateZip = [addr.city, [addr.state, addr.zip || addr.zipCode].filter(Boolean).join(" ")]
+		.filter(Boolean)
+		.join(", ");
+
+	return [street, cityStateZip].filter(Boolean).join(", ");
 }
 
 function mapSubmission(sub, addressByPropertyId) {

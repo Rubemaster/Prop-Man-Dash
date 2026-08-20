@@ -116,6 +116,11 @@ body {
 .handsontable th {
 	background-color: #e4e4e7 !important;
 	color: #000000 !important;
+	text-align: left !important;
+}
+
+.handsontable th .relative {
+	justify-content: flex-start;
 }
 
 .handsontable td {

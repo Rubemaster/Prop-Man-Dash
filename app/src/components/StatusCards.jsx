@@ -44,7 +44,19 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 												background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)",
 											}}
 										/>
-										<div style={{ position: "absolute", bottom: "24px", left: "24px", color: "#fff", fontWeight: "bold", fontSize: "1.75rem" }}>
+										<div
+											style={{
+												position: "absolute",
+												bottom: "24px",
+												left: 0,
+												right: 0,
+												paddingLeft: "24px",
+												textAlign: "left",
+												color: "#fff",
+												fontWeight: "bold",
+												fontSize: "1.75rem",
+											}}
+										>
 											Learn More About Rooftraq
 										</div>
 									</>

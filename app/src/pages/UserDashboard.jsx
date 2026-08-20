@@ -29,18 +29,6 @@ export default function UserDashboard() {
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} hidePropertiesContent propertiesRepeat={4} showOtherCards={false} cardHeight={30} propertiesAsPlaceholder firstPlaceholderHeight={500} firstPlaceholderImage="/img/learn-more-bg.png" />
 				<br />
-				<div className="row">
-					<div className="col">
-						<div className="col-md">
-							<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
-								<span className="learn-more-card-heading">Learn More About Rooftraq</span>
-							</a>
-						</div>
-					</div>
-					<div className="col" />
-					<div className="col" />
-				</div>
-				<br />
 			</div>
 			<Footer />
 		</>

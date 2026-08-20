@@ -1,9 +1,17 @@
 export default function BlankCards() {
 	return (
-		<div style={{ display: "flex", flexWrap: "wrap", gap: "16px", paddingLeft: "16px", paddingRight: "16px" }}>
-			<div className="card" style={{ flex: "0 0 200px", width: "200px", height: "100px" }} />
-			<div className="card" style={{ flex: "0 0 200px", width: "200px", height: "100px" }} />
-			<div className="card" style={{ flex: "0 0 200px", width: "200px", height: "100px" }} />
+		<div
+			style={{
+				display: "grid",
+				gridTemplateColumns: "repeat(auto-fit, minmax(min(300px, 100%), 300px))",
+				gap: "16px",
+				paddingLeft: "16px",
+				paddingRight: "16px",
+			}}
+		>
+			<div className="card" style={{ height: "100px" }} />
+			<div className="card" style={{ height: "100px" }} />
+			<div className="card" style={{ height: "100px" }} />
 		</div>
 	);
 }

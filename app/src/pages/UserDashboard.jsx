@@ -28,7 +28,7 @@ export default function UserDashboard() {
 				<br />
 				<BlankCards />
 				<br />
-				<StatusCards total={propertyCount} delivered={inspectionCount} trailingCards={1} />
+				<StatusCards total={propertyCount} delivered={inspectionCount} trailingCards={1} propertiesHeadingBlack={false} />
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} hidePropertiesContent propertiesRepeat={4} showOtherCards={false} cardHeight={30} />
 				<br />

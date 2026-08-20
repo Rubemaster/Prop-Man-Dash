@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30 }) {
+export default function StatusCards({ total = 0, delivered = 0, pending = 0, hidePropertiesContent = false, propertiesRepeat = 1, showOtherCards = true, cardHeight = 180, trailingCards = 0, trailingCardHeight = 30, propertiesHeadingBlack = true }) {
 	return (
 		<div className="row">
 			{Array.from({ length: propertiesRepeat }).map((_, i) => (
@@ -8,7 +8,7 @@ export default function StatusCards({ total = 0, delivered = 0, pending = 0, hid
 					<div className="col-md">
 						<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>
 							<div className="card text-center text-white mb-3" id="total-orders" style={{ height: `${cardHeight}px`, overflow: "hidden" }}>
-								<div className="card-header"><h5 className="card-title properties-heading-black">Properties</h5></div>
+								<div className="card-header"><h5 className={propertiesHeadingBlack ? "card-title properties-heading-black" : "card-title"}>Properties</h5></div>
 								{!hidePropertiesContent && (
 									<div className="card-body"><h3 className="card-title">{total}</h3></div>
 								)}

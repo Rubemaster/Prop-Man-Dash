@@ -4,27 +4,32 @@ import Navbar from "../components/Navbar";
 import DataTable from "../components/DataTable";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
 
+const EMPTY_ADDRESS = { address: "", city: "", zip: "", state: "" };
+
 function extractAddress(sub) {
 	const addr = (sub.questions || []).find((q) => q.id === "x8sa")?.value;
-	if (!addr) return "";
-	if (typeof addr !== "object") return addr;
+	if (!addr || typeof addr !== "object") return EMPTY_ADDRESS;
 
-	const street = addr.address1 || addr.address || "";
-	const cityStateZip = [addr.city, [addr.state, addr.zip || addr.zipCode].filter(Boolean).join(" ")]
-		.filter(Boolean)
-		.join(", ");
-
-	return [street, cityStateZip].filter(Boolean).join(", ");
+	return {
+		address: addr.address1 || addr.address || "",
+		city: addr.city || "",
+		zip: addr.zip || addr.zipCode || "",
+		state: addr.state || "",
+	};
 }
 
 function mapSubmission(sub, addressByPropertyId) {
 	const propertyId =
 		(sub.urlParameters || []).find((p) => p.name === "propertyid" || p.id === "propertyid")
 			?.value?.trim() || "";
+	const { address, city, zip, state } = addressByPropertyId[propertyId] || EMPTY_ADDRESS;
 
 	return {
 		submissionId: sub.submissionId,
-		propertyAddress: addressByPropertyId[propertyId] || propertyId,
+		propertyAddress: address || propertyId,
+		city,
+		zip,
+		state,
 		status: "Pending",
 		notes: "",
 	};

@@ -35,10 +35,12 @@ export default function UserDashboard() {
 			</div>
 			<br />
 			<div className="row">
-				<div className="col-md-4">
-					<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
-						<span className="learn-more-card-heading">Learn More About Rooftraq</span>
-					</a>
+				<div className="col">
+					<div className="col-md">
+						<a href="https://rooftraq.com" target="_blank" rel="noopener noreferrer" className="learn-more-card">
+							<span className="learn-more-card-heading">Learn More About Rooftraq</span>
+						</a>
+					</div>
 				</div>
 			</div>
 			<br />

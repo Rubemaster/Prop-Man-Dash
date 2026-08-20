@@ -15,7 +15,7 @@ Ext.onReady(function () {
 	var fileGrid = new Ext.Panel({
 		region: "center",
 		layout: "fit",
-		html: '<div style="padding:20px;color:#777;font-style:italic;">' + emptyLabel + ' yet.</div>',
+		html: '<div style="padding:20px;color:#777;font-style:italic;">' + emptyLabel + '.</div>',
 	});
 
 	var statusBar = new Ext.ux.StatusBar({
@@ -49,7 +49,7 @@ Ext.onReady(function () {
 						emptyLabel +
 						' in "' +
 						Ext.util.Format.htmlEncode(node.text) +
-						'" yet.</div>'
+						'".</div>'
 				);
 			},
 		},

@@ -154,6 +154,10 @@ body {
 	color: #ffffff !important;
 }
 
+.card h5.properties-heading-black {
+	color: #000000 !important;
+}
+
 .extplorer-panel {
 	background-color: #e4e4e7;
 	color: #000000;

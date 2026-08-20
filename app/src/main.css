@@ -8,6 +8,12 @@ body {
 	background-color: #2b405a;
 }
 
+.navbar {
+	position: sticky;
+	top: 0;
+	z-index: 1030;
+}
+
 .learn-more-card {
 	display: block;
 	position: relative;

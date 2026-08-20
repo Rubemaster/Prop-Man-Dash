@@ -5,6 +5,7 @@ import "handsontable/styles/ht-theme-main.min.css";
 export default function DataTable({ columns, rows, actionLabel, actionDoneLabel, onAction }) {
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
+	const colWidths = columns.map(() => 100);
 
 	if (actionLabel && onAction) {
 		dataColumns.push({
@@ -17,14 +18,14 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 				const btn = document.createElement("button");
 				btn.type = "button";
 				btn.textContent = done ? actionDoneLabel || "Requested" : actionLabel;
-				btn.className = "btn btn-sm btn-primary";
-				btn.disabled = done;
+				btn.className = done ? "btn btn-sm btn-clerk-purple" : "btn btn-sm btn-primary";
 				btn.onclick = () => onAction(row, rowData);
 				td.appendChild(btn);
 				return td;
 			},
 		});
 		colHeaders.push("Actions");
+		colWidths.push(200);
 	}
 
 	return (
@@ -33,7 +34,7 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 				data={rows}
 				columns={dataColumns}
 				colHeaders={colHeaders}
-				colWidths={100}
+				colWidths={colWidths}
 				rowHeaders={true}
 				width="100%"
 				stretchH="all"

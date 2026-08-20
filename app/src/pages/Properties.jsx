@@ -94,7 +94,7 @@ export default function Properties() {
 							columns={PROPERTY_COLUMNS}
 							rows={rows}
 							actionLabel="Request Inspection"
-							actionDoneLabel="Requested"
+							actionDoneLabel="New Inspection"
 							onAction={requestInspection}
 						/>
 					</div>

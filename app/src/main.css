@@ -78,6 +78,18 @@ body {
 	color: #ffffff !important;
 }
 
+.btn-clerk-purple {
+	background-color: #6c47ff !important;
+	border: none !important;
+	border-radius: 0 !important;
+	color: #ffffff !important;
+}
+
+.btn-clerk-purple:hover {
+	background-color: #5a36e0 !important;
+	color: #ffffff !important;
+}
+
 /* Handsontable grids sit inside black cards; keep the grid itself light with readable contrast */
 .handsontable th {
 	background-color: #e4e4e7 !important;

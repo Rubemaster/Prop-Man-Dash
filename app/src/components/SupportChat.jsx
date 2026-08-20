@@ -85,7 +85,7 @@ export default function SupportChat() {
 					bottom: "20px",
 					right: "20px",
 					zIndex: 1000,
-					backgroundColor: "#000000",
+					backgroundColor: "#6b7280",
 					color: "#fff",
 					border: "none",
 					borderRadius: "999px",

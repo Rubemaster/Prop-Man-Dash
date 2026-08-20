@@ -1,9 +1,11 @@
 import Navbar from "../components/Navbar";
+import SectionTabs from "../components/SectionTabs";
 
 export default function Results() {
 	return (
 		<>
 			<Navbar variant="customer" />
+			<SectionTabs />
 			<br />
 			<div className="row">
 				<div className="col-md">

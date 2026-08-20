@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
+import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
 
@@ -54,6 +55,7 @@ export default function InspectionsPending() {
 	return (
 		<>
 			<Navbar variant="customer" />
+			<SectionTabs />
 			<br />
 			<div className="row">
 				<div className="col-md">

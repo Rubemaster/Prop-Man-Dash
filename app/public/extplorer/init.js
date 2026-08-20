@@ -25,7 +25,7 @@ Ext.onReady(function () {
 	});
 
 	var root = new Ext.tree.TreeNode({
-		text: "Results",
+		text: isProjects ? "Projects" : "Results",
 		id: "root",
 		expanded: true,
 		draggable: false,

@@ -84,7 +84,13 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				td.innerHTML = "";
 				const rowData = instance.getSourceDataAtRow(row) || {};
 				const btn = makeActionButton(actionLabel);
-				btn.onclick = () => onAction(row, rowData);
+				if (rowData.__actionDisabled) {
+					btn.disabled = true;
+					btn.style.backgroundColor = "#a1a1aa";
+					btn.style.cursor = "not-allowed";
+				} else {
+					btn.onclick = () => onAction(row, rowData);
+				}
 				td.appendChild(btn);
 				return td;
 			},

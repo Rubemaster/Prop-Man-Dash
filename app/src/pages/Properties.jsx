@@ -56,14 +56,24 @@ export default function Properties() {
 	const refresh = async () => {
 		setLoading(true);
 		try {
-			const res = await fetch(`/api/property-entries?t=${Date.now()}`, { cache: "no-store" });
-			const data = await res.json();
-			const properties = data.properties || [];
+			const bust = Date.now();
+			const [propertiesRes, inspectionsRes] = await Promise.all([
+				fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
+				fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
+			]);
+			const { properties = [] } = await propertiesRes.json();
+			const { inspections = [] } = await inspectionsRes.json();
+			const pendingPropertyIds = new Set(inspections.map((i) => i.propertyId));
+
+			const rows = properties.map((p) => ({
+				...p,
+				__actionDisabled: pendingPropertyIds.has(p.submissionId),
+			}));
 			console.warn(
-				`[properties-debug] ${new Date().toISOString()} fetched ${properties.length} rows:`,
-				properties.map((r) => `${r.submissionId} (${r.address})`)
+				`[properties-debug] ${new Date().toISOString()} fetched ${rows.length} rows:`,
+				rows.map((r) => `${r.submissionId} (${r.address})`)
 			);
-			setRows(properties);
+			setRows(rows);
 		} finally {
 			setLoading(false);
 		}

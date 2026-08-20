@@ -1,1 +1,0 @@
-.auth-wrapper{background:url(/img/login-bg.jpg) bottom/cover no-repeat;justify-content:center;align-items:center;width:100%;min-height:100vh;display:flex;position:relative}.auth-wrapper:before{content:"";background:#2b405ab3;position:absolute;inset:0}.auth-wrapper>*{z-index:1;position:relative}

@@ -72,14 +72,20 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 		hotRef.current?.hotInstance?.loadData(rows);
 	}, [rows]);
 
+	// stretchH="all" only computes against the container's width at the time
+	// Handsontable's own render fires -- if the container is still settling
+	// (e.g. from a parent layout/CSS change), the stretch calc goes stale and
+	// leaves a gap on the right. Confirmed via logging: container was
+	// 1118.89px, but the table itself rendered at 1035-1059px. A
+	// ResizeObserver on the container forces a recompute whenever its actual
+	// size changes.
 	useEffect(() => {
 		const hot = hotRef.current?.hotInstance;
 		if (!hot) return;
-		const container = hot.rootElement;
-		console.warn("[datatable-debug] container width", container.getBoundingClientRect().width, container.offsetWidth);
-		console.warn("[datatable-debug] table width", hot.view?._wt?.wtTable?.getWidth?.());
-		console.warn("[datatable-debug] parent width", container.parentElement.getBoundingClientRect().width);
-	});
+		const observer = new ResizeObserver(() => hot.refreshDimensions());
+		observer.observe(hot.rootElement.parentElement);
+		return () => observer.disconnect();
+	}, []);
 
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);

@@ -4,6 +4,7 @@ const TABS = [
 	{ label: "Properties", path: "/properties" },
 	{ label: "Inspections Pending", path: "/inspections-pending" },
 	{ label: "Results", path: "/results" },
+	{ label: "Projects", path: "/projects" },
 ];
 
 export default function SectionTabs() {

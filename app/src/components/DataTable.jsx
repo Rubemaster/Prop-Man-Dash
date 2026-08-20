@@ -59,7 +59,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 				colHeaders={colHeaders}
 				colWidths={colWidths}
 				rowHeaders={true}
-				rowHeaderWidth={35}
+				rowHeaderWidth={25}
 				width="100%"
 				stretchH="all"
 				height="auto"

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function StatusCards({ total = 0, delivered = 0, pending = 0 }) {
 	return (
-		<div className="row">
+		<div className="row" style={{ flexWrap: "wrap" }}>
 			<div className="col" style={{ minWidth: "200px" }}>
 				<div className="col-md">
 					<Link to="/properties" style={{ color: "inherit", textDecoration: "none" }}>

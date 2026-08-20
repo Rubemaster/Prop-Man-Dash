@@ -53,10 +53,8 @@ export default function Properties() {
 		}
 	};
 
-	const requestInspection = (rowIndex) => {
-		setRows((prev) =>
-			prev.map((row, i) => (i === rowIndex ? { ...row, __actionDone: true } : row))
-		);
+	const requestInspection = (rowIndex, rowData) => {
+		console.log("Requesting new inspection for", rowData);
 	};
 
 	return (
@@ -93,8 +91,7 @@ export default function Properties() {
 						<DataTable
 							columns={PROPERTY_COLUMNS}
 							rows={rows}
-							actionLabel="Request Inspection"
-							actionDoneLabel="New Inspection"
+							actionLabel="New Inspection"
 							onAction={requestInspection}
 						/>
 					</div>

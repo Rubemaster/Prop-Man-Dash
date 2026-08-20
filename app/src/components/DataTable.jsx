@@ -11,7 +11,7 @@ function measureTextWidth(text) {
 	return ctx.measureText(text).width;
 }
 
-export default function DataTable({ columns, rows, actionLabel, actionDoneLabel, onAction }) {
+export default function DataTable({ columns, rows, actionLabel, onAction }) {
 	const dataColumns = columns.map((c) => ({ data: c.key }));
 	const colHeaders = columns.map((c) => c.label);
 	const colWidths = columns.map(() => 100);
@@ -23,10 +23,9 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 			renderer(instance, td, row) {
 				td.innerHTML = "";
 				const rowData = instance.getSourceDataAtRow(row) || {};
-				const done = !!rowData.__actionDone;
 				const btn = document.createElement("button");
 				btn.type = "button";
-				btn.textContent = done ? actionDoneLabel || "Requested" : actionLabel;
+				btn.textContent = actionLabel;
 				btn.className = "btn btn-sm btn-clerk-purple";
 				btn.onclick = () => onAction(row, rowData);
 				td.appendChild(btn);
@@ -34,11 +33,7 @@ export default function DataTable({ columns, rows, actionLabel, actionDoneLabel,
 			},
 		});
 		colHeaders.push("Actions");
-		const widestLabel = Math.max(
-			measureTextWidth(actionLabel),
-			measureTextWidth(actionDoneLabel || "Requested")
-		);
-		colWidths.push(Math.ceil(widestLabel) + BUTTON_PADDING_PX);
+		colWidths.push(Math.ceil(measureTextWidth(actionLabel)) + BUTTON_PADDING_PX);
 	}
 
 	return (

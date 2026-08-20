@@ -88,14 +88,14 @@ body {
 	color: #000000;
 	border: 2px solid #a6cbe8;
 	border-bottom: none;
-	padding: 1.25rem;
+	padding: 1.25rem 0;
 }
 
 .extplorer-panel-footer {
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	margin: 0 -1.25rem -1.25rem;
+	margin: 0 0 -1.25rem;
 	padding: 0 1.25rem;
 	background-color: #a6cbe8;
 }

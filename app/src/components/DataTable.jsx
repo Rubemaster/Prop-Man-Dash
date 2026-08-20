@@ -2,13 +2,22 @@ import { HotTable } from "@handsontable/react-wrapper";
 import "handsontable/styles/handsontable.min.css";
 import "handsontable/styles/ht-theme-main.min.css";
 
-const BUTTON_PADDING_PX = 56; // btn-sm padding + border + Handsontable's own cell padding
+const CELL_PADDING_PX = 16; // Handsontable's own <td> padding, not part of the button itself
 
-function measureTextWidth(text) {
-	const canvas = measureTextWidth._canvas || (measureTextWidth._canvas = document.createElement("canvas"));
-	const ctx = canvas.getContext("2d");
-	ctx.font = "14px system-ui, -apple-system, sans-serif";
-	return ctx.measureText(text).width;
+// Renders the real button off-screen and reads its actual width, rather than
+// estimating from font metrics -- guarantees the column matches the button.
+function measureButtonWidth(label) {
+	const btn = document.createElement("button");
+	btn.type = "button";
+	btn.textContent = label;
+	btn.className = "btn btn-sm btn-clerk-purple";
+	btn.style.position = "absolute";
+	btn.style.visibility = "hidden";
+	btn.style.whiteSpace = "nowrap";
+	document.body.appendChild(btn);
+	const width = btn.getBoundingClientRect().width;
+	document.body.removeChild(btn);
+	return width;
 }
 
 export default function DataTable({ columns, rows, actionLabel, onAction }) {
@@ -34,7 +43,7 @@ export default function DataTable({ columns, rows, actionLabel, onAction }) {
 			},
 		});
 		colHeaders.push("Actions");
-		colWidths.push(Math.ceil(measureTextWidth(actionLabel)) + BUTTON_PADDING_PX);
+		colWidths.push(Math.ceil(measureButtonWidth(actionLabel)) + CELL_PADDING_PX);
 	}
 
 	return (

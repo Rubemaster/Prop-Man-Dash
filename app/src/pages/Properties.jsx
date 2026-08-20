@@ -72,7 +72,7 @@ export default function Properties() {
 	const refresh = async () => {
 		setLoading(true);
 		try {
-			const res = await fetch("/api/property-entries", { cache: "no-store" });
+			const res = await fetch(`/api/property-entries?t=${Date.now()}`, { cache: "no-store" });
 			const data = await res.json();
 			setRows((data.responses || []).map(mapSubmission));
 		} finally {

@@ -29,7 +29,7 @@ export async function onRequestGet({ request, env }) {
 	}
 
 	const upstream = await fetch(
-		`https://api.fillout.com/v1/api/forms/${FILLOUT_FORM_ID}/submissions`,
+		`https://api.fillout.com/v1/api/forms/${FILLOUT_FORM_ID}/submissions?t=${Date.now()}`,
 		{ headers: { Authorization: `Bearer ${env.FILLOUT_API}` }, cache: "no-store" }
 	);
 	const data = await upstream.json();

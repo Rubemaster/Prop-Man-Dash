@@ -64,11 +64,13 @@ function pagesFunctionsDevPlugin() {
       const { onRequestPost } = await server.ssrLoadModule('/functions/api/fillout.js')
       const { onRequestGet: onRequestGetInspections } = await server.ssrLoadModule('/functions/api/inspection-entries.js')
       const { onRequestPost: onRequestPostInspection } = await server.ssrLoadModule('/functions/api/inspection.js')
+      const { onRequestGet: onRequestGetStreamToken } = await server.ssrLoadModule('/functions/api/stream-token.js')
 
       server.middlewares.use('/api/property-entries', toNodeMiddleware(onRequestGet, env))
       server.middlewares.use('/api/fillout', toNodeMiddleware(onRequestPost, env))
       server.middlewares.use('/api/inspection-entries', toNodeMiddleware(onRequestGetInspections, env))
       server.middlewares.use('/api/inspection', toNodeMiddleware(onRequestPostInspection, env))
+      server.middlewares.use('/api/stream-token', toNodeMiddleware(onRequestGetStreamToken, env))
     },
   }
 }

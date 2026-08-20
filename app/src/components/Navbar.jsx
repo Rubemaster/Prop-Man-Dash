@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { UserButton } from "@clerk/clerk-react";
+import SupportChat from "./SupportChat";
 
 export default function Navbar({ variant }) {
 	return (
@@ -26,6 +27,7 @@ export default function Navbar({ variant }) {
 			<div className="ml-auto">
 				<UserButton afterSignOutUrl="/" />
 			</div>
+			<SupportChat />
 		</nav>
 	);
 }

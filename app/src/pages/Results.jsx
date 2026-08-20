@@ -1,6 +1,4 @@
 import Navbar from "../components/Navbar";
-import DataTable from "../components/DataTable";
-import { TABLE_COLUMNS, SAMPLE_ROW } from "../tableColumns";
 
 export default function Results() {
 	return (
@@ -10,7 +8,11 @@ export default function Results() {
 			<div className="row">
 				<div className="col-md">
 					<div className="card card-body">
-						<DataTable columns={TABLE_COLUMNS} rows={[SAMPLE_ROW]} />
+						<iframe
+							src="/extplorer/index.html"
+							title="Results file explorer"
+							style={{ width: "100%", height: "600px", border: "1px solid #000" }}
+						/>
 					</div>
 				</div>
 			</div>

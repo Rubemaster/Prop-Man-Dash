@@ -8,6 +8,22 @@ body {
 	background-color: #2b405a;
 }
 
+.mobile-notice {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.mobile-notice {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		background-color: #a6cbe8;
+		color: #000000;
+		padding: 12px 16px;
+	}
+}
+
 .navbar {
 	position: fixed;
 	top: 0;

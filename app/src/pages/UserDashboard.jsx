@@ -3,6 +3,7 @@ import { useUser, useAuth } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import StatusCards from "../components/StatusCards";
 import Footer from "../components/Footer";
+import MobileNotice from "../components/MobileNotice";
 import { apiFetch } from "../apiClient";
 
 export default function UserDashboard() {
@@ -28,6 +29,7 @@ export default function UserDashboard() {
 		<>
 			<div style={{ minHeight: "100vh" }}>
 				<Navbar variant="customer" />
+				<MobileNotice />
 				<br />
 				<StatusCards total={propertyCount} delivered={inspectionCount} showProjectsCard propertiesHeadingBlack={false} />
 				<br />

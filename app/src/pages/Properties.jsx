@@ -5,6 +5,7 @@ import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
 import Footer from "../components/Footer";
 import { PROPERTY_COLUMNS } from "../propertyColumns";
+import { apiFetch } from "../apiClient";
 
 const FILLOUT_SCRIPT_SRC = "https://server.fillout.com/embed/v1/";
 const INSPECTION_FORM_ID = "tSESngGoRKus";
@@ -60,8 +61,8 @@ export default function Properties() {
 		try {
 			const bust = Date.now();
 			const [propertiesRes, inspectionsRes] = await Promise.all([
-				fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
-				fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
 			]);
 			const { properties = [] } = await propertiesRes.json();
 			const { inspections = [] } = await inspectionsRes.json();

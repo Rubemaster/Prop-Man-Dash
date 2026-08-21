@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import { StreamChat } from "stream-chat";
 import { Chat, Channel, Window, ChannelHeader, MessageList, MessageInput } from "stream-chat-react";
 import "stream-chat-react/dist/css/v2/index.css";
+import { apiFetch } from "../apiClient";
 
 export default function SupportChat() {
 	const { user } = useUser();
@@ -25,7 +26,7 @@ export default function SupportChat() {
 		let cancelled = false;
 
 		(async () => {
-			const res = await fetch("/api/stream-token", { cache: "no-store" });
+			const res = await apiFetch("/api/stream-token", { cache: "no-store" });
 			const { token, apiKey } = await res.json();
 
 			const chatClient = StreamChat.getInstance(apiKey);

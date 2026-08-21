@@ -3,6 +3,7 @@ import { useUser } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import StatusCards from "../components/StatusCards";
 import Footer from "../components/Footer";
+import { apiFetch } from "../apiClient";
 
 export default function UserDashboard() {
 	const { user } = useUser();
@@ -12,10 +13,10 @@ export default function UserDashboard() {
 	useEffect(() => {
 		if (!user?.id) return;
 		const bust = Date.now();
-		fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" })
+		apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" })
 			.then((res) => res.json())
 			.then((data) => setPropertyCount((data.properties || []).length));
-		fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" })
+		apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" })
 			.then((res) => res.json())
 			.then((data) => setInspectionCount((data.inspections || []).length));
 	}, [user?.id]);

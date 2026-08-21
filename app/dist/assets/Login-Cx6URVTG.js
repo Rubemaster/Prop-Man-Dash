@@ -1,1 +1,0 @@
-import{n as e,t}from"./index-Dyo2Yzxy.js";import{t as n}from"./auth-DJr3KJ9I.js";var r=t();function i(){return(0,r.jsx)(`div`,{className:`auth-wrapper`,children:(0,r.jsx)(e,{afterSignInUrl:`/user`,signUpUrl:`/register`,appearance:n})})}export{i as default};

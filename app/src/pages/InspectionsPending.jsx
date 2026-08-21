@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
@@ -9,6 +9,7 @@ import { apiFetch } from "../apiClient";
 
 export default function InspectionsPending() {
 	const { user } = useUser();
+	const { getToken } = useAuth();
 	const [rows, setRows] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -16,9 +17,10 @@ export default function InspectionsPending() {
 		setLoading(true);
 		try {
 			const bust = Date.now();
+			const token = await getToken();
 			const [inspectionsRes, propertiesRes] = await Promise.all([
-				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
-				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }, token),
+				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }, token),
 			]);
 			const { inspections = [] } = await inspectionsRes.json();
 			const { properties = [] } = await propertiesRes.json();

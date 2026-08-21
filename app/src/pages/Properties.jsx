@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
@@ -44,6 +44,7 @@ function openInspectionPopup(propertyId, clerkUserId) {
 
 export default function Properties() {
 	const { user } = useUser();
+	const { getToken } = useAuth();
 	const [rows, setRows] = useState([]);
 	const [loading, setLoading] = useState(false);
 
@@ -60,9 +61,10 @@ export default function Properties() {
 		setLoading(true);
 		try {
 			const bust = Date.now();
+			const token = await getToken();
 			const [propertiesRes, inspectionsRes] = await Promise.all([
-				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
-				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }, token),
+				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }, token),
 			]);
 			const { properties = [] } = await propertiesRes.json();
 			const { inspections = [] } = await inspectionsRes.json();

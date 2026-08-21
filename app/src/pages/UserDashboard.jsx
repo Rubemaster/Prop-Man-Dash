@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, useAuth } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import StatusCards from "../components/StatusCards";
 import Footer from "../components/Footer";
@@ -7,18 +7,21 @@ import { apiFetch } from "../apiClient";
 
 export default function UserDashboard() {
 	const { user } = useUser();
+	const { getToken } = useAuth();
 	const [propertyCount, setPropertyCount] = useState(0);
 	const [inspectionCount, setInspectionCount] = useState(0);
 
 	useEffect(() => {
 		if (!user?.id) return;
 		const bust = Date.now();
-		apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" })
-			.then((res) => res.json())
-			.then((data) => setPropertyCount((data.properties || []).length));
-		apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" })
-			.then((res) => res.json())
-			.then((data) => setInspectionCount((data.inspections || []).length));
+		getToken().then((token) => {
+			apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }, token)
+				.then((res) => res.json())
+				.then((data) => setPropertyCount((data.properties || []).length));
+			apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }, token)
+				.then((res) => res.json())
+				.then((data) => setInspectionCount((data.inspections || []).length));
+		});
 	}, [user?.id]);
 
 	return (

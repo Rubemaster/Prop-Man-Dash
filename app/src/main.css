@@ -20,7 +20,8 @@ body {
 		gap: 12px;
 		background-color: #a6cbe8;
 		color: #000000;
-		padding: 12px 16px;
+		height: 35px;
+		padding: 0 16px;
 	}
 }
 

@@ -1,0 +1,18 @@
+name = "dashboard-api"
+main = "src/index.js"
+compatibility_date = "2026-08-21"
+
+[vars]
+# The frontend's origin -- the ONLY origin CORS responses are allowed for
+# (see src/index.js's withCors). Also passed to Clerk's authenticateRequest
+# as the authorizedParties allowlist, so update both together.
+ALLOWED_ORIGIN = "https://user.rooftraq.com"
+
+# Secrets -- never commit these, set with `wrangler secret put <NAME>` (see DEPLOY.md):
+#   CLERK_SECRET_KEY        Clerk Dashboard > API Keys > Secret key
+#   CLERK_PUBLISHABLE_KEY   Clerk Dashboard > API Keys > Publishable key (not actually
+#                           secret, but kept here rather than [vars] so dev/prod Clerk
+#                           instances can be swapped without editing this file)
+#   FILLOUT_API             Fillout > Settings > Developer > API key
+#   STREAM_API_KEY          GetStream dashboard > app > API key
+#   STREAM_API_SECRET       GetStream dashboard > app > API secret

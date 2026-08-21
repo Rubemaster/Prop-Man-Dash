@@ -1,0 +1,16 @@
+{
+  "name": "dashboard-api",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@clerk/backend": "^3.16.9"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

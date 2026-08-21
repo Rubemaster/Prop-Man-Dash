@@ -90,6 +90,22 @@ export default function Properties() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user?.id]);
 
+	// Fillout's embedded iframe posts { type: "form_submit" } to the parent
+	// window on completion (confirmed from @fillout/react's source, which
+	// wraps the same underlying protocol our vanilla embed script uses) --
+	// listening for it directly avoids waiting on the user to hit Refresh
+	// after submitting either the "Add Property" or "New Inspection" form.
+	useEffect(() => {
+		function handleFilloutSubmit(event) {
+			if (event.origin === "https://embed.fillout.com" && event.data?.type === "form_submit") {
+				refresh();
+			}
+		}
+		window.addEventListener("message", handleFilloutSubmit);
+		return () => window.removeEventListener("message", handleFilloutSubmit);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const requestInspection = (rowIndex, rowData) => {
 		openInspectionPopup(rowData.submissionId, user?.id);
 	};

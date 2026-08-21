@@ -5,6 +5,7 @@ import SectionTabs from "../components/SectionTabs";
 import DataTable from "../components/DataTable";
 import Footer from "../components/Footer";
 import { INSPECTION_COLUMNS } from "../inspectionColumns";
+import { apiFetch } from "../apiClient";
 
 export default function InspectionsPending() {
 	const { user } = useUser();
@@ -16,8 +17,8 @@ export default function InspectionsPending() {
 		try {
 			const bust = Date.now();
 			const [inspectionsRes, propertiesRes] = await Promise.all([
-				fetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
-				fetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/inspection-entries?t=${bust}`, { cache: "no-store" }),
+				apiFetch(`/api/property-entries?t=${bust}`, { cache: "no-store" }),
 			]);
 			const { inspections = [] } = await inspectionsRes.json();
 			const { properties = [] } = await propertiesRes.json();

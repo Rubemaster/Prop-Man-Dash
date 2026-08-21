@@ -1,0 +1,9 @@
+{
+  "name": "prop-man-dash-functions",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@clerk/backend": "^3.16.9"
+  }
+}

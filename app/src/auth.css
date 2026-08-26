@@ -19,3 +19,11 @@
 	position: relative;
 	z-index: 1;
 }
+
+.auth-register-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 32px;
+}

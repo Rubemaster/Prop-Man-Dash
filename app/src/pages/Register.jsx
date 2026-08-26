@@ -22,7 +22,7 @@ export default function Register() {
 						<div
 							className="calendly-inline-widget"
 							data-url="https://calendly.com/rubengrick2/demo-call?hide_event_type_details=1&hide_gdpr_banner=1"
-							style={{ width: "100%", height: 700 }}
+							style={{ width: "100%", height: 500 }}
 						/>
 					</div>
 				</div>

@@ -7,7 +7,7 @@ export const clerkAppearance = {
 		fontFamily: "system-ui, -apple-system, sans-serif",
 	},
 	elements: {
-		rootBox: { width: "100%", display: "flex", justifyContent: "center" },
+		rootBox: { width: "100%", display: "flex", justifyContent: "center", background: "transparent" },
 		card: {
 			boxShadow: "0 1px 3px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.08)",
 			border: "1px solid #e4e4e7",

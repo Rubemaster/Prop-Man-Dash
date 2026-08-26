@@ -27,6 +27,7 @@ export default function Register() {
 					</div>
 				</div>
 			</div>
+			<div className="auth-bottombar" />
 		</div>
 	);
 }

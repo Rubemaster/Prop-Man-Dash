@@ -14,6 +14,7 @@ export default function Register() {
 
 	return (
 		<div className="auth-wrapper">
+			<div className="auth-topbar" />
 			<div className="auth-register-row">
 				<SignUp afterSignUpUrl="/user" signInUrl="/" appearance={clerkAppearance} />
 				<div

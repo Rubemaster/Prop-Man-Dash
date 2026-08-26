@@ -15,13 +15,15 @@ export default function Register() {
 	return (
 		<div className="auth-wrapper">
 			<div className="auth-topbar" />
-			<div className="auth-register-row">
-				<SignUp afterSignUpUrl="/user" signInUrl="/" appearance={clerkAppearance} />
-				<div
-					className="calendly-inline-widget"
-					data-url="https://calendly.com/rubengrick2/demo-call?hide_event_type_details=1&hide_gdpr_banner=1"
-					style={{ minWidth: 320, height: 700 }}
-				/>
+			<div className="auth-content">
+				<div className="auth-register-row">
+					<SignUp afterSignUpUrl="/user" signInUrl="/" appearance={clerkAppearance} />
+					<div
+						className="calendly-inline-widget"
+						data-url="https://calendly.com/rubengrick2/demo-call?hide_event_type_details=1&hide_gdpr_banner=1"
+						style={{ minWidth: 320, height: 700 }}
+					/>
+				</div>
 			</div>
 		</div>
 	);

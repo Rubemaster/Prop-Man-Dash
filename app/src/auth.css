@@ -4,8 +4,7 @@
 	position: relative;
 	background: url("/img/login-bg.jpg") center bottom / cover no-repeat;
 	display: flex;
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
 }
 
 .auth-wrapper::before {
@@ -21,13 +20,18 @@
 }
 
 .auth-topbar {
-	position: absolute;
-	top: 0;
-	left: 0;
+	flex: 0 0 100px;
 	width: 100%;
 	height: 100px;
 	background: #ffffff;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-content {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .auth-register-row {

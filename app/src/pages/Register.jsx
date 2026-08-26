@@ -14,6 +14,7 @@ export default function Register() {
 
 	return (
 		<div className="auth-wrapper">
+			<img className="auth-bg-image" src="/img/login-bg.jpg" alt="" />
 			<div className="auth-topbar" />
 			<div className="auth-content">
 				<div className="auth-register-row">

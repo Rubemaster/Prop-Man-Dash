@@ -2,7 +2,7 @@
 	min-height: 100vh;
 	width: 100%;
 	position: relative;
-	background: url("/img/login-bg.jpg") center top / cover no-repeat;
+	background: url("/img/login-bg.jpg") center top / cover no-repeat fixed;
 	display: flex;
 	flex-direction: column;
 }

@@ -1,0 +1,1 @@
+import{n as e,t}from"./index-tDHXu8kk.js";import{t as n}from"./auth-CEwwn5iJ.js";var r=t();function i(){return(0,r.jsxs)(`div`,{className:`auth-wrapper`,children:[(0,r.jsx)(`img`,{className:`auth-bg-image`,src:`/img/login-bg.jpg`,alt:``}),(0,r.jsx)(e,{afterSignInUrl:`/user`,signUpUrl:`/register`,appearance:n})]})}export{i as default};
